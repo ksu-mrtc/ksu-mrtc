@@ -1,0 +1,14 @@
+---
+title: "Home"
+layout: "top"
+---
+
+# 伝統みらい研究センター
+## Traditional Mirai Research Center
+
+![柿右衛門様式の陶器](images/hero-pottery.png)
+
+伝統工芸の未来を拓く、研究と実践の拠点。
+九州各地の伝統工芸品、特に柿右衛門様式の陶器を中心とした研究を行っています。
+
+[詳しく見る](/about/)

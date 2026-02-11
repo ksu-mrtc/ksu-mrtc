@@ -1,0 +1,127 @@
+/* Error Page Styles */
+.error-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 44px);
+    padding: 20px;
+    background-color: #fff; /* White background as per image */
+    font-family: "SF Pro Display", "SF Pro Icons", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    color: #1d1d1f;
+}
+
+.error-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 100px;
+    max-width: 1000px;
+    width: 100%;
+    animation: fadeIn 0.8s ease-out;
+}
+
+.error-image-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.error-text-wrapper {
+    flex: 1;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.error-image {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.1));
+    /* No border-radius on the image itself if it's an illustration object */
+}
+
+.error-title {
+    font-size: 80px; /* Large "Oops!" */
+    font-weight: 700;
+    margin-bottom: 32px;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+}
+
+.error-message {
+    font-size: 24px;
+    line-height: 1.4;
+    color: #86868b; /* Gray text */
+    margin-bottom: 40px;
+    font-weight: 500;
+}
+
+.error-button {
+    display: inline-flex;
+    align-items: center;
+    background-color: #1d1d1f; /* Black button */
+    color: #fff;
+    padding: 14px 32px;
+    border-radius: 980px;
+    font-size: 17px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.error-button:hover {
+    background-color: #333;
+    transform: scale(1.02);
+    text-decoration: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    .error-page {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+
+    .error-container {
+        flex-direction: column;
+        gap: 30px;
+        text-align: center;
+    }
+
+    .error-image-wrapper {
+        justify-content: center;
+    }
+
+    .error-text-wrapper {
+        align-items: center;
+        text-align: center;
+    }
+
+    .error-image {
+        max-width: 400px;
+    }
+
+    .error-title {
+        font-size: 48px;
+    }
+
+    .error-message {
+        font-size: 19px;
+    }
+}

@@ -1,16 +1,136 @@
-## Hi there 👋
+# 伝統みらい研究センター ウェブサイト
 
-<!--
-**ksu-mrtc/ksu-mrtc** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+このプロジェクトは、MarkdownファイルをベースにしたSPA（Single Page Application）ライクな静的ウェブサイトです。
+HTML/CSS/JavaScriptのみで構成されており、ビルドプロセスを必要とせずにMarkdownを動的にレンダリングして表示します。
 
-Here are some ideas to get you started:
+## システム概要
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+- **Markdown駆動**: コンテンツは全て `md/` ディレクトリ内のMarkdownファイルとして管理されます。
+- **動的ルーティング**: URLパラメータ (`?p=...`) またはパスに基づいて、対応するMarkdownファイルを非同期で読み込み、ブラウザ上でHTMLに変換して表示します。
+- **SPAライクな挙動**: ページ遷移時にフルリロードを行わず、JavaScriptでコンテンツを書き換えます（`History API`を使用）。
+- **メタデータ管理**: `content.json` でサイト内のページ構成やメタデータ（タイトル、日付、カテゴリ、レイアウト等）を一元管理しています。
+
+## ディレクトリ構成
+
+```
+.
+├── md/                 # マークダウンファイル格納ディレクトリ (コンテンツ本体)
+│   ├── index.md        # トップページ
+│   ├── news/           # ニュース記事
+│   ├── research/       # 研究プロジェクト記事
+│   └── parts/          # ヘッダー・フッター等の共通パーツ
+├── css/                # コンポーネント別CSSファイル
+├── js/                 # アプリケーションロジック (main.js)
+├── images/             # 画像ファイル
+├── content.json        # サイト構成定義ファイル
+└── index.html          # エントリーポイント
+```
+
+## コンテンツの管理方法
+
+### 1. 新しい記事・ページの追加
+
+1. **Markdownファイルの作成**:
+   `md/` ディレクトリ内の適切な場所にMarkdownファイルを作成します。例えばニュース記事なら `md/news/YYYY-MM-DD-title.md` とします。
+
+2. **フロントマターの記述**:
+   ファイルの先頭にYAML形式でメタデータを記述してください。
+
+   ```markdown
+   ---
+   title: "記事のタイトル"
+   date: "2025-01-01"
+   category: "news"    # news, research, etc.
+   layout: "article"   # article (詳細), list (一覧), top (トップ)
+   description: "記事の短い説明"
+   image: "/images/news/thumbnail.jpg" # (任意) サムネイル画像
+   ---
+   ```
+
+3. **content.json への登録**:
+   `/content.json` に新しいエントリを追加します。ここで定義した情報がルーティングや一覧表示に使用されます。
+
+   ```json
+   {
+     "url": "/news/new-article",
+     "path": "md/news/new-article.md",
+     "title": "記事のタイトル",
+     "date": "2025-01-01",
+     "category": "news",
+     "layout": "article",
+     "description": "記事の短い説明"
+   }
+   ```
+
+### 2. リンクの貼り方
+
+- **内部リンク**: `?p=md/path/to/file.md` の形式で記述します。
+  - 例: `[お知らせ](?p=md/news/index.md)`
+
+- **外部リンク**: 通常通り `https://...` で記述します。
+
+<!-- ## 開発・ローカル実行
+
+特別なビルドツールは不要ですが、`fetch` APIを使用しているためローカルサーバーが必要です。
+
+```bash
+# Pythonを使用する場合
+python3 -m http.server 8000
+
+# Node.js (http-server) を使用する場合
+npx http-server .
+```
+
+ブラウザで `http://localhost:8000` にアクセスしてください。 -->
+
+## 技術スタック
+
+- **HTML5 / CSS3**: Vanilla CSS (CSS Variables使用)
+- **JavaScript**: Vanilla JS (ES Modules不使用、単一ファイル)
+- **markdown-it**: ブラウザ側でのMarkdownレンダリングエンジン
+- **Google Fonts**: Noto Serif JP, Outfit
+
+## markdown-it マークダウン記法リファレンス
+
+### 基本編
+
+| 記法 | 説明 | 記述例 |
+|------|------|--------|
+| `# 見出し` | 見出し (H1-H6) | `# H1` `## H2` `### H3` |
+| `**太字**` | 太字 (Strong) | `**重要なテキスト**` |
+| `*斜体*` | 斜体 (Emphasis) | `*強調テキスト*` |
+| `***太字斜体***` | 太字かつ斜体 | `***とても重要***` |
+| `~~取り消し線~~` | 取り消し線 (Strikethrough) | `~~削除されたテキスト~~` |
+| `[リンク](URL)` | リンク | `[Google](https://google.com)` |
+| `![代替テキスト](URL)` | 画像 | `![ロゴ](logo.png)` |
+| `` `コード` `` | インラインコード | `` `const x = 1;` `` |
+| `> 引用` | 引用ブロック (Blockquote) | `> これは引用です` |
+| `- リスト` | 箇条書きリスト | `- 項目1` `- 項目2` |
+| `1. リスト` | 番号付きリスト | `1. 最初` `2. 次` |
+| `---` | 水平線 (Thematic break) | `---` または `***` |
+| 空行 | 段落の区切り | 2行以上の空行 |
+| `\` | エスケープ | `\*アスタリスク\*` |
+| `<br>` または末尾スペース2つ | 改行 (Hard break) | `行末にスペース2つ  ` |
+
+### 応用編
+
+| 記法 | 説明 | 記述例 |
+|------|------|--------|
+| ` ``` ` | コードブロック (Fenced code) | ` ```js`<br>`console.log('hello');`<br>` ``` ` |
+| `    コード` | インデントコードブロック | 4スペースでインデント |
+| `\| 表 \|` | テーブル | `\| 列1 \| 列2 \|`<br>`\|---\|---\|`<br>`\| A \| B \|` |
+| `:---` `:---:` `---:` | テーブル配置 | 左寄せ / 中央 / 右寄せ |
+<!-- | `[^1]` | 脚注 (Footnote) ※要プラグイン | `テキスト[^1]`<br>`[^1]: 脚注内容` |
+| `++挿入++` | 挿入 (Insert) ※要プラグイン | `++追加テキスト++` |
+| `==ハイライト==` | ハイライト (Mark) ※要プラグイン | `==重要==` |
+| `^上付き^` | 上付き文字 ※要プラグイン | `H^2^O` → H²O |
+| `~下付き~` | 下付き文字 ※要プラグイン | `H~2~O` → H₂O |
+| `:emoji:` | 絵文字 ※要プラグイン | `:smile:` → 😄 |
+| `- [ ] タスク` | タスクリスト ※要プラグイン | `- [x] 完了` `- [ ] 未完了` |
+| `用語`<br>`: 定義` | 定義リスト (Definition list) ※要プラグイン | `用語`<br>`: 説明文` |
+| `[TOC]` | 目次 (Table of Contents) ※要プラグイン | `[TOC]` |
+| `{#id .class}` | 属性付与 ※要プラグイン | `# 見出し {#custom-id}` | -->
+| `<details>` | 折りたたみ (HTMLタグ) | `<details><summary>詳細</summary>内容</details>` |
+
+> **Note**: 「※要プラグイン」と記載された機能は、markdown-itのプラグインを追加でインストール・設定する必要があります。
+> 本プロジェクトでは標準機能のみを使用しています。
