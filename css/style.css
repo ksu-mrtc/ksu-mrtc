@@ -35,6 +35,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    letter-spacing: 0.05em;
 }
 
 /* Header */
@@ -196,6 +197,7 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 600;
     margin-bottom: var(--spacing-sm);
     line-height: 1.3;
+    letter-spacing: 0.03em;
 }
 
 h1 {
@@ -214,6 +216,7 @@ h2 {
 p {
     margin-bottom: var(--spacing-sm);
     line-height: 1.8;
+    letter-spacing: 0.05em;
 }
 
 ul, ol {
