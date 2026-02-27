@@ -243,13 +243,11 @@ a:hover {
 }
 /* Main Visual (Markdown Image) */
 .site-main img {
-    width: 100%;
+    max-width: 100%;
     height: auto;
     display: block;
     border-radius: 12px;
     margin-bottom: var(--spacing-lg);
-    object-fit: cover;
-    max-height: 500px;
 }
 
 /* Ensure paragraph wrapper doesn't add extra space if needed */
