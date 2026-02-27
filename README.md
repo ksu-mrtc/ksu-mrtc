@@ -47,19 +47,12 @@ HTML/CSS/JavaScriptのみで構成されており、ビルドプロセスを必�
    ---
    ```
 
-3. **content.json への登録**:
-   `/content.json` に新しいエントリを追加します。ここで定義した情報がルーティングや一覧表示に使用されます。
+3. **content.json の自動生成**:
+   `content.json` は GitHub Actions によって自動生成されます。`main` ブランチに push すると、`scripts/generate-content.js` が実行され、Markdownファイルのフロントマターから自動的に `content.json` が生成・デプロイされます。手動での編集は不要です。
 
-   ```json
-   {
-     "url": "/news/new-article",
-     "path": "md/news/new-article.md",
-     "title": "記事のタイトル",
-     "date": "2025-01-01",
-     "category": "news",
-     "layout": "article",
-     "description": "記事の短い説明"
-   }
+   ローカルで確認したい場合は以下を実行してください：
+   ```bash
+   node scripts/generate-content.js
    ```
 
 ### 2. リンクの貼り方
