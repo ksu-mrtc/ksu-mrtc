@@ -21,7 +21,8 @@ const STATIC_PAGES = {
   'md/index.md': { url: '/', layout: 'top' },
   'md/news/index.md': { url: '/news/', layout: 'list', collection: 'news' },
   'md/research/index.md': { url: '/research/', layout: 'list', collection: 'research' },
-  'md/kakiemon/index.md': { url: '/kakiemon/', layout: 'article' }
+  'md/kakiemon/index.md': { url: '/kakiemon/', layout: 'article' },
+  'md/center/index.md' : { url: '/center/', layout: 'article' }
 };
 
 /**
