@@ -16,14 +16,6 @@ const path = require('path');
 const MD_DIR = path.join(__dirname, '..', 'md');
 const OUTPUT_FILE = path.join(__dirname, '..', 'content.json');
 
-// 固定ページの定義（Front Matterで上書き可能）
-const STATIC_PAGES = {
-  'md/index.md': { url: '/', layout: 'top' },
-  'md/news/index.md': { url: '/news/', layout: 'list', collection: 'news' },
-  'md/research/index.md': { url: '/research/', layout: 'list', collection: 'research' },
-  'md/kakiemon/index.md': { url: '/kakiemon/', layout: 'article' },
-  'md/center/index.md' : { url: '/center/', layout: 'article' }
-};
 
 /**
  * YAML Front Matterをパースする
@@ -87,19 +79,19 @@ function getMarkdownFiles(dir, baseDir = dir) {
 
 /**
  * ファイルパスからURLを生成
+ * md/index.md -> /
+ * md/news/index.md -> /news/
+ * md/news/2025-01-01-launch.md -> /news/2025-01-01-launch
  */
-function generateUrl(filePath, attributes) {
-  // 固定ページの場合はその定義を使用
-  if (STATIC_PAGES[filePath] && STATIC_PAGES[filePath].url) {
-    return STATIC_PAGES[filePath].url;
-  }
-  
-  // md/news/2025-01-01-launch.md -> /news/2025-01-01-launch
+function generateUrl(filePath) {
   let url = '/' + filePath
     .replace(/^md\//, '')
     .replace(/\.md$/, '')
     .replace(/\/index$/, '/');
-  
+
+  // ルートの index -> /
+  if (url === '/index') url = '/';
+
   return url;
 }
 
@@ -121,41 +113,30 @@ function main() {
     
     // 基本情報
     const entry = {
-      url: generateUrl(filePath, attributes),
+      url: generateUrl(filePath),
       path: filePath
     };
-    
-    // 固定ページのデフォルト設定をマージ
-    if (STATIC_PAGES[filePath]) {
-      Object.assign(entry, STATIC_PAGES[filePath]);
+
+    // Front Matterの属性をマージ
+    const KNOWN_KEYS = ['title', 'date', 'category', 'layout', 'description', 'image', 'collection'];
+    for (const key of KNOWN_KEYS) {
+      if (attributes[key]) entry[key] = attributes[key];
     }
-    
-    // Front Matterの属性をマージ（上書き）
-    if (attributes.title) entry.title = attributes.title;
-    if (attributes.date) entry.date = attributes.date;
-    if (attributes.category) entry.category = attributes.category;
-    if (attributes.layout) entry.layout = attributes.layout;
-    if (attributes.description) entry.description = attributes.description;
-    if (attributes.image) entry.image = attributes.image;
-    if (attributes.collection) entry.collection = attributes.collection;
     
     contentIndex.push(entry);
   }
   
-  // 日付とパスでソート（日付があるものは新しい順、ないものはパス順）
+  // ソート: index.md（セクションページ）を先に、次に日付順、最後にパス順
   contentIndex.sort((a, b) => {
-    // 固定ページを先に
-    const aIsStatic = !!STATIC_PAGES[a.path];
-    const bIsStatic = !!STATIC_PAGES[b.path];
-    if (aIsStatic && !bIsStatic) return -1;
-    if (!aIsStatic && bIsStatic) return 1;
-    
-    // 日付があるものは日付順
+    const aIsIndex = a.path.endsWith('/index.md') || a.path === 'md/index.md';
+    const bIsIndex = b.path.endsWith('/index.md') || b.path === 'md/index.md';
+    if (aIsIndex && !bIsIndex) return -1;
+    if (!aIsIndex && bIsIndex) return 1;
+
     if (a.date && b.date) {
       return a.date.localeCompare(b.date);
     }
-    
-    // パス順
+
     return a.path.localeCompare(b.path);
   });
   
