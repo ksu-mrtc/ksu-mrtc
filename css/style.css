@@ -29,6 +29,7 @@
 
 body {
     font-family: var(--font-sans);
+    font-size: 16px;
     color: var(--color-text);
     background-color: var(--color-bg);
     -webkit-font-smoothing: antialiased;
@@ -36,6 +37,7 @@ body {
     flex-direction: column;
     min-height: 100vh;
     letter-spacing: 0.05em;
+    line-height: 1.8;
 }
 
 /* Header */
@@ -259,3 +261,9 @@ a:hover {
 body.top .site-main {
     padding-top: var(--header-height);
 }
+
+/* 記事詳細の本文横幅を可読性の高い幅に制限 (620px - 660px の中間の640px) */
+body.article .site-main {
+    max-width: 640px;
+}
+
