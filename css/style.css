@@ -236,22 +236,52 @@ h4 {
 }
 
 p {
-    margin-bottom: var(--spacing-sm);
-    line-height: 1.8;
-    letter-spacing: 0.05em;
+    margin-bottom: 2.0rem;
+    line-height: 1.9;
+    letter-spacing: 0.04em;
 }
 
 ul, ol {
-    margin-bottom: var(--spacing-sm);
-    padding-left: var(--spacing-md);
+    margin-bottom: 2.0rem;
+    padding-left: 1.75rem;
+}
+
+li {
+    margin-bottom: 0.75rem;
+    line-height: 1.8;
+}
+
+li:last-child {
+    margin-bottom: 0;
+}
+
+blockquote {
+    margin: 2.5rem 0;
+    padding: 0.75rem 1.5rem;
+    border-left: 4px solid #d1d1d6;
+    color: #636366;
+    background-color: #f2f2f7;
+    border-radius: 0 8px 8px 0;
+}
+
+blockquote p {
+    margin-bottom: 0;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #e5e5ea;
+    margin: 3.5rem 0;
 }
 
 a {
     color: var(--color-links);
     text-decoration: none;
+    transition: opacity 0.2s ease;
 }
 
 a:hover {
+    opacity: 0.8;
     text-decoration: underline;
 }
 
@@ -269,7 +299,8 @@ a:hover {
     height: auto;
     display: block;
     border-radius: 12px;
-    margin-bottom: var(--spacing-lg);
+    margin-top: 3.0rem;
+    margin-bottom: 3.0rem;
 }
 
 /* Ensure paragraph wrapper doesn't add extra space if needed */
