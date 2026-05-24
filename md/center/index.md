@@ -2,7 +2,7 @@
 title: "センターについて"
 navTitle: "センターについて"
 navOrder: 1
-layout: "article"
+layout: "page"
 ---
 # センターの概要（歴史・構成）
 
