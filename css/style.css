@@ -197,22 +197,42 @@ body {
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-sans);
     font-weight: 600;
-    margin-bottom: var(--spacing-sm);
     line-height: 1.3;
     letter-spacing: 0.03em;
 }
 
+/* ページ先頭の見出しは上部余白を相殺して余分な余白を防ぐ */
+.site-main > *:first-child,
+.site-main > h1:first-child,
+.site-main > h2:first-child {
+    margin-top: 0 !important;
+}
+
 h1 {
-    font-size: 2.2rem; /* Slightly smaller than 2.5rem */
-    font-weight: 700; /* Bold */
-    margin-bottom: var(--spacing-md);
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-top: 3.5rem;
+    margin-bottom: 1.5rem;
 }
 
 h2 {
-    font-size: 1.6rem; /* Slightly smaller than 1.8rem */
-    margin-top: var(--spacing-md);
+    font-size: 1.6rem;
+    margin-top: 2.75rem;
+    margin-bottom: 1.25rem;
     border-bottom: 1px solid #eee;
     padding-bottom: var(--spacing-xs);
+}
+
+h3 {
+    font-size: 1.3rem;
+    margin-top: 2.00rem;
+    margin-bottom: 1.00rem;
+}
+
+h4 {
+    font-size: 1.1rem;
+    margin-top: 1.50rem;
+    margin-bottom: 0.75rem;
 }
 
 p {
