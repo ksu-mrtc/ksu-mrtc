@@ -1,5 +1,6 @@
 ---
 title: "Home"
+navTitle: "伝み"
 layout: "top"
 ---
 

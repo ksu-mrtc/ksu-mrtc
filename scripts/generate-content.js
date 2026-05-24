@@ -118,7 +118,7 @@ function main() {
     };
 
     // Front Matterの属性をマージ
-    const KNOWN_KEYS = ['title', 'date', 'category', 'layout', 'description', 'image', 'collection'];
+    const KNOWN_KEYS = ['title', 'date', 'category', 'layout', 'description', 'image', 'collection', 'navTitle', 'navOrder'];
     for (const key of KNOWN_KEYS) {
       if (attributes[key]) entry[key] = attributes[key];
     }
@@ -145,6 +145,37 @@ function main() {
   
   console.log(`Generated ${OUTPUT_FILE}`);
   console.log(`Total entries: ${contentIndex.length}`);
+
+  // --- md/parts/header.md の自動生成 ---
+  console.log('Generating md/parts/header.md...');
+  const navItems = contentIndex.filter(item => item.navTitle);
+  
+  // navOrderでソート
+  navItems.sort((a, b) => {
+    const orderA = parseInt(a.navOrder) || 9999;
+    const orderB = parseInt(b.navOrder) || 9999;
+    return orderA - orderB;
+  });
+
+  // ルートの index.md からロゴテキストを取得（デフォルトは '伝み'）
+  const rootItem = contentIndex.find(item => item.path === 'md/index.md');
+  const logoText = (rootItem && rootItem.navTitle) ? rootItem.navTitle : '伝み';
+
+  // ルートの index.md 自体は箇条書きメニューのリストからは除外する
+  const menuItems = navItems.filter(item => item.path !== 'md/index.md');
+
+  const headerLines = [
+    `[${logoText}](?p=md/index.md)`,
+    ''
+  ];
+
+  for (const item of menuItems) {
+    headerLines.push(`- [${item.navTitle}](?p=${item.path})`);
+  }
+
+  const HEADER_FILE = path.join(__dirname, '..', 'md', 'parts', 'header.md');
+  fs.writeFileSync(HEADER_FILE, headerLines.join('\n') + '\n');
+  console.log(`Generated ${HEADER_FILE}`);
 }
 
 main();

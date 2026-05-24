@@ -1,5 +1,7 @@
 ---
 title: "15代 酒井田柿右衛門について"
+navTitle: "柿右衛門"
+navOrder: 3
 layout: "article"
 ---
 

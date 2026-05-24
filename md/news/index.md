@@ -1,5 +1,7 @@
 ---
 title: "News"
+navTitle: "お知らせ"
+navOrder: 2
 layout: "list"
 collection: "news"
 ---

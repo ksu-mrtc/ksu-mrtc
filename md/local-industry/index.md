@@ -1,5 +1,7 @@
 ---
 title: "地域産業"
+navTitle: "地域産業研究"
+navOrder: 4
 layout: "article"
 ---
 
