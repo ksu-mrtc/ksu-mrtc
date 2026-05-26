@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                         document.head.appendChild(link);
                     }
 
-                    contentMarkdown += `
+                    const latestNewsHtml = `
 <section class="latest-news-section">
     <h2>Latest News</h2>
     <a href="?p=${latestNews.path}" class="news-item latest-news-item">
@@ -91,6 +91,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     </div>
 </section>
 `;
+                    // マークダウン本文中に [latest-news] がある場合は置換、ない場合は末尾に追加
+                    const placeholderRegex = /\[latest-news\]/i;
+                    if (placeholderRegex.test(contentMarkdown)) {
+                        contentMarkdown = contentMarkdown.replace(placeholderRegex, latestNewsHtml);
+                    } else {
+                        contentMarkdown += latestNewsHtml;
+                    }
                 }
             }
 
