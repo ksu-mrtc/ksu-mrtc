@@ -295,7 +295,7 @@ a:hover {
     color: var(--color-text-secondary);
 }
 /* Main Visual (Markdown Image) */
-.site-main img {
+.site-main img:not(.news-image) {
     max-width: 100%;
     height: auto;
     display: block;
