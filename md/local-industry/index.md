@@ -1,6 +1,6 @@
 ---
 title: "地域産業"
-navTitle: "地域産業研究"
+navTitle: "地域産業"
 navOrder: 4
 layout: "page"
 ---
