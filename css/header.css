@@ -184,3 +184,21 @@
         top: 21px; /* Adjusted for 2px height */
     }
 }
+
+/* Header Logo Image Styles */
+.site-header-inner > p:first-of-type img {
+    height: 28px;
+    width: auto;
+    display: block;
+    border-radius: 6px;
+    transition: opacity 0.2s ease;
+}
+
+.site-header-inner > p:first-of-type a {
+    display: flex;
+    align-items: center;
+}
+
+.site-header-inner > p:first-of-type a:hover img {
+    opacity: 0.8;
+}

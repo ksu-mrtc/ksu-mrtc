@@ -165,7 +165,7 @@ function main() {
   const menuItems = navItems.filter(item => item.path !== 'md/index.md');
 
   const headerLines = [
-    `[${logoText}](?p=md/index.md)`,
+    `[![${logoText}](images/favicon/favicon.jpg)](?p=md/index.md)`,
     ''
   ];
 
