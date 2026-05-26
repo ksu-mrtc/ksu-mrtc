@@ -76,6 +76,7 @@
     height: 100%;
     display: block;
     object-fit: cover;
+    margin: 0 !important;
 }
 
 .news-image-placeholder {
