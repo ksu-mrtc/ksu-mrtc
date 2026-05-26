@@ -1,7 +1,7 @@
 ---
 title: "名前"
 category: "member"
-layout: "page"
+layout: "article"
 description: ""
 ---
 
