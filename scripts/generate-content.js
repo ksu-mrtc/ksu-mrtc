@@ -148,7 +148,10 @@ function main() {
 
   // --- md/parts/header.md の自動生成 ---
   console.log('Generating md/parts/header.md...');
-  const navItems = contentIndex.filter(item => item.navTitle);
+  // md/直下フォルダのindex.mdのみをヘッダーメニュー対象とする（深階層のファイルは除外）
+  const navItems = contentIndex.filter(item => 
+    item.navTitle && /^md\/[^/]+\/index\.md$/.test(item.path)
+  );
   
   // navOrderでソート
   navItems.sort((a, b) => {
