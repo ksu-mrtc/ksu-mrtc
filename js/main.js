@@ -242,6 +242,9 @@ ${item.image ? `<img src="${item.image}" alt="${item.title}" class="news-image">
             // Re-attach event listeners
             attachListeners();
 
+            // Scroll to top on page transition
+            window.scrollTo(0, 0);
+
         } catch (error) {
             console.error('Error rendering page:', error);
             
@@ -322,6 +325,9 @@ ${item.image ? `<img src="${item.image}" alt="${item.title}" class="news-image">
                 e.preventDefault();
                 updateRoute('md/index.md');
             });
+
+            // Scroll to top on error page load
+            window.scrollTo(0, 0);
         }
     }
 
