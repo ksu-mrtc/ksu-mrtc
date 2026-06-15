@@ -1,6 +1,5 @@
 ---
 title: "Research"
-layout: "list"
 collection: "research"
 ---
 

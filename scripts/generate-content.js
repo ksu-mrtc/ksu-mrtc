@@ -118,7 +118,8 @@ function main() {
     };
 
     // Front Matterの属性をマージ
-    const KNOWN_KEYS = ['title', 'date', 'category', 'layout', 'description', 'image', 'collection', 'navTitle', 'navOrder'];
+    // layout は保存しない: 表示レイアウトはアーカイブデータではなく、閲覧時に規約から推論する（js/main.js の inferLayout を参照）
+    const KNOWN_KEYS = ['title', 'date', 'category', 'description', 'image', 'collection', 'navTitle', 'navOrder'];
     for (const key of KNOWN_KEYS) {
       if (attributes[key]) entry[key] = attributes[key];
     }

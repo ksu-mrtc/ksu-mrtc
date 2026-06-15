@@ -1,7 +1,6 @@
 ---
 title: "名前"
 category: "member"
-layout: "article"
 description: ""
 ---
 

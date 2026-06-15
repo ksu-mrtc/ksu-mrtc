@@ -1,7 +1,6 @@
 ---
 title: "Home"
 navTitle: "伝み"
-layout: "top"
 ---
 
 # 伝統みらい研究センター

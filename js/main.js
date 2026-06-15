@@ -46,7 +46,12 @@ document.addEventListener('DOMContentLoaded', async () => {
             
             const { attributes, body } = parseFrontMatter(text);
             const pageData = { ...metadata, ...attributes };
-            
+
+            // 表示レイアウトはアーカイブデータに保存せず、パス・collection・ファイル名から規約的に推論する。
+            // これにより、Markdownファイルには対象そのものを記述するメタデータのみが残り、
+            // データの可搬性（別システムへの移行容易性）が保たれる。
+            const layout = inferLayout(normalizedPath, pageData);
+
             document.title = `${pageData.title || 'Traditional Mirai Research Center'} | 伝統みらい研究センター`;
             
             // Construct full markdown
@@ -203,7 +208,7 @@ ${item.image ? `<img src="${item.image}" alt="${item.title}" class="news-image">
             let htmlContent = md.render(contentMarkdown);
 
             // Add Back Button for Articles
-            if (pageData.layout === 'article') {
+            if (layout === 'article') {
                 // Ensure CSS is loaded
                 if (!document.getElementById('news-css')) {
                     const link = document.createElement('link');
@@ -237,7 +242,7 @@ ${item.image ? `<img src="${item.image}" alt="${item.title}" class="news-image">
             document.body.appendChild(footerContainer);
             
             // Update body class for page-specific styling
-            document.body.className = pageData.layout || 'page';
+            document.body.className = layout;
 
             // Re-attach event listeners
             attachListeners();
@@ -372,6 +377,18 @@ ${item.image ? `<img src="${item.image}" alt="${item.title}" class="news-image">
 
     window.addEventListener('popstate', handleRoute);
     handleRoute();
+
+    // 表示レイアウトを規約から推論する（アーカイブMarkdown側には layout を持たせない）。
+    //   md/index.md            → top    （トップページ）
+    //   collection を持つ      → list   （一覧ページ。主にセクションの index.md）
+    //   ファイル名が index.md  → page   （静的な説明ページ）
+    //   それ以外（葉の記事）   → article（ニュース・研究成果・メンバー等の個別ページ）
+    function inferLayout(path, data) {
+        if (path === 'md/index.md') return 'top';
+        if (data && data.collection) return 'list';
+        if (path.endsWith('/index.md')) return 'page';
+        return 'article';
+    }
 
     function parseFrontMatter(text) {
         // Updated regex to handle CRLF and loose spacing

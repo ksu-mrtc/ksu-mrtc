@@ -1,6 +1,5 @@
 ---
 title: "製作メンバー"
-layout: "list"
 collection: "member"
 ---
 

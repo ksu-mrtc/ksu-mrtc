@@ -2,7 +2,6 @@
 title: "柿右衛門様式の赤絵における発色メカニズムの研究"
 date: "2024-12-15"
 category: "research"
-layout: "article"
 ---
 
 # 概要
