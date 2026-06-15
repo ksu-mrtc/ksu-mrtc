@@ -218,10 +218,19 @@ ${item.image ? `<img src="${item.image}" alt="${item.title}" class="news-image">
                     document.head.appendChild(link);
                 }
 
+                // 戻り先は、記事が属する親ディレクトリの index.md（＝そのセクションの一覧ページ）とする。
+                //   md/news/2026-02-18.md          → md/news/index.md
+                //   md/center/member/sample-1.md   → md/center/member/index.md
+                // 親 index.md が存在しない場合はトップページへフォールバックし、リンク切れを防ぐ。
+                const parentPath = normalizedPath.replace(/\/[^/]+\.md$/, '/index.md');
+                const hasParent = contentIndex.some(item => item.path === parentPath);
+                const backTarget = hasParent ? parentPath : 'md/index.md';
+                const backLabel = hasParent ? '一覧に戻る' : 'ホームに戻る';
+
                 const backBtnHtml = `
                     <div class="pagination">
-                        <a href="?p=md/news/index.md" class="pagination-btn">
-                            一覧に戻る
+                        <a href="?p=${backTarget}" class="pagination-btn">
+                            ${backLabel}
                         </a>
                     </div>
                 `;
