@@ -32,6 +32,9 @@ jobs:
       - name: Generate content.json
         run: node scripts/generate-content.js
 
+      - name: Generate slideshow.json
+        run: node scripts/generate-slideshow.js
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 

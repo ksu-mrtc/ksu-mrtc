@@ -1,0 +1,127 @@
+/* ========================================
+   Hero Slideshow Styles
+   ======================================== */
+
+.hero-slideshow {
+    position: relative;
+    width: 100%;
+    display: grid;
+    overflow: hidden;
+    border-radius: 0;
+    margin: 0;
+}
+
+/* Constrain to parent width */
+body.top .hero-slideshow {
+    width: 100%;
+    border-radius: 12px;
+}
+
+/* Stack all slides in the same grid cell */
+.hero-slideshow__slide {
+    grid-area: 1 / 1;
+    width: 100%;
+    opacity: 0;
+    transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: opacity;
+}
+
+.hero-slideshow__slide.active {
+    opacity: 1;
+}
+
+.hero-slideshow__slide img {
+    width: 100%;
+    height: auto;
+    display: block;
+    /* Override default .site-main img styles */
+    border-radius: 0 !important;
+    margin: 0 !important;
+}
+
+/* Subtle Ken Burns zoom effect on the active slide */
+.hero-slideshow__slide.active img {
+    animation: kenburns 8s ease-out forwards;
+}
+
+@keyframes kenburns {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.05);
+    }
+}
+
+/* Navigation dots */
+.hero-slideshow__dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+}
+
+.hero-slideshow__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.hero-slideshow__dot:hover {
+    background: rgba(255, 255, 255, 0.8);
+    transform: scale(1.2);
+}
+
+.hero-slideshow__dot.active {
+    background: #ffffff;
+    transform: scale(1.2);
+}
+
+/* Hide dots when only 1 image */
+.hero-slideshow--single .hero-slideshow__dots {
+    display: none;
+}
+
+/* Progress bar under each dot */
+.hero-slideshow__dot::after {
+    content: '';
+    display: none;
+}
+
+/* Overlay gradient for better dot visibility */
+.hero-slideshow::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.15));
+    pointer-events: none;
+    z-index: 5;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .hero-slideshow {
+        aspect-ratio: 16 / 9;
+    }
+
+    .hero-slideshow__dots {
+        bottom: 14px;
+        gap: 8px;
+    }
+
+    .hero-slideshow__dot {
+        width: 6px;
+        height: 6px;
+    }
+}

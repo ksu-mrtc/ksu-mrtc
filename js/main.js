@@ -11,17 +11,21 @@ document.addEventListener('DOMContentLoaded', async () => {
     let headerMd = '';
     let footerMd = '';
 
+    let slideshowData = [];
+
     // Load static parts
     try {
-        const [headerRes, footerRes, contentRes] = await Promise.all([
+        const [headerRes, footerRes, contentRes, slideshowRes] = await Promise.all([
             fetch('md/parts/header.md'),
             fetch('md/parts/footer.md'),
-            fetch('content.json')
+            fetch('content.json'),
+            fetch('slideshow.json')
         ]);
         
         headerMd = await headerRes.text();
         footerMd = await footerRes.text();
         contentIndex = await contentRes.json();
+        slideshowData = await slideshowRes.json();
 
 
     } catch (error) {
@@ -56,6 +60,34 @@ document.addEventListener('DOMContentLoaded', async () => {
             
             // Construct full markdown
             let contentMarkdown = body;
+
+            // Show hero slideshow on home page
+            if (normalizedPath === 'md/index.md' && slideshowData.length > 0) {
+                const slidesHtml = slideshowData.map((slide, i) =>
+                    `<div class="hero-slideshow__slide${i === 0 ? ' active' : ''}">
+                        <img src="${slide.src}" alt="${slide.alt || ''}">
+                    </div>`
+                ).join('');
+
+                const dotsHtml = slideshowData.map((_, i) =>
+                    `<button class="hero-slideshow__dot${i === 0 ? ' active' : ''}" data-index="${i}" aria-label="スライド ${i + 1}"></button>`
+                ).join('');
+
+                const singleClass = slideshowData.length === 1 ? ' hero-slideshow--single' : '';
+                const slideshowHtml = `
+<div class="hero-slideshow${singleClass}" id="hero-slideshow">
+    ${slidesHtml}
+    <div class="hero-slideshow__dots">${dotsHtml}</div>
+</div>`;
+
+                // マークダウン本文中に <!-- @slideshow --> がある場合は置換、ない場合はコンテンツ先頭に追加
+                const slideshowPlaceholder = /<!--\s*@slideshow\s*-->/i;
+                if (slideshowPlaceholder.test(contentMarkdown)) {
+                    contentMarkdown = contentMarkdown.replace(slideshowPlaceholder, slideshowHtml);
+                } else {
+                    contentMarkdown = slideshowHtml + '\n\n' + contentMarkdown;
+                }
+            }
 
             // Show latest news on home page
             if (normalizedPath === 'md/index.md') {
@@ -96,8 +128,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     </div>
 </section>
 `;
-                    // マークダウン本文中に [latest-news] がある場合は置換、ない場合は末尾に追加
-                    const placeholderRegex = /\[latest-news\]/i;
+                    // マークダウン本文中に <!-- @latest-news --> がある場合は置換、ない場合は末尾に追加
+                    const placeholderRegex = /<!--\s*@latest-news\s*-->/i;
                     if (placeholderRegex.test(contentMarkdown)) {
                         contentMarkdown = contentMarkdown.replace(placeholderRegex, latestNewsHtml);
                     } else {
@@ -256,6 +288,9 @@ ${item.image ? `<img src="${item.image}" alt="${item.title}" class="news-image">
             // Re-attach event listeners
             attachListeners();
 
+            // Initialize slideshow if present
+            initSlideshow();
+
             // Scroll to top on page transition
             window.scrollTo(0, 0);
 
@@ -397,6 +432,66 @@ ${item.image ? `<img src="${item.image}" alt="${item.title}" class="news-image">
         if (data && data.collection) return 'list';
         if (path.endsWith('/index.md')) return 'page';
         return 'article';
+    }
+
+    // スライドショーの自動再生とインタラクションを初期化する。
+    // ページ遷移のたびに呼ばれるため、既存タイマーのクリーンアップも行う。
+    let slideshowTimer = null;
+
+    function initSlideshow() {
+        // 既存タイマーをクリア
+        if (slideshowTimer) {
+            clearInterval(slideshowTimer);
+            slideshowTimer = null;
+        }
+
+        const container = document.getElementById('hero-slideshow');
+        if (!container) return;
+
+        const slides = container.querySelectorAll('.hero-slideshow__slide');
+        const dots = container.querySelectorAll('.hero-slideshow__dot');
+        if (slides.length <= 1) return;
+
+        let currentIndex = 0;
+        const INTERVAL = 5000; // 5秒ごとに切り替え
+
+        function goToSlide(index) {
+            slides[currentIndex].classList.remove('active');
+            dots[currentIndex].classList.remove('active');
+            currentIndex = index;
+            slides[currentIndex].classList.add('active');
+            dots[currentIndex].classList.add('active');
+        }
+
+        function nextSlide() {
+            goToSlide((currentIndex + 1) % slides.length);
+        }
+
+        // 自動再生開始
+        slideshowTimer = setInterval(nextSlide, INTERVAL);
+
+        // ドットクリックで任意のスライドへジャンプ
+        dots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                const index = parseInt(dot.dataset.index);
+                if (index !== currentIndex) {
+                    goToSlide(index);
+                    // タイマーをリセット（クリック直後にすぐ切り替わらないように）
+                    clearInterval(slideshowTimer);
+                    slideshowTimer = setInterval(nextSlide, INTERVAL);
+                }
+            });
+        });
+
+        // ホバー時に自動再生を一時停止
+        container.addEventListener('mouseenter', () => {
+            clearInterval(slideshowTimer);
+            slideshowTimer = null;
+        });
+
+        container.addEventListener('mouseleave', () => {
+            slideshowTimer = setInterval(nextSlide, INTERVAL);
+        });
     }
 
     function parseFrontMatter(text) {
