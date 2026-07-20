@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                     const latestNewsHtml = `
 <section class="latest-news-section">
-    <h2>Latest News</h2>
+    <h2>最新ニュース</h2>
     <a href="?p=${latestNews.path}" class="news-item latest-news-item">
         <div class="news-image-wrapper">
              ${latestNews.image ? `<img src="${latestNews.image}" alt="${latestNews.title}" class="news-image">` : '<div class="news-image-placeholder"></div>'}
