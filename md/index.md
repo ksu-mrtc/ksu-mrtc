@@ -9,6 +9,7 @@ navTitle: "伝み"
 
 <!-- @latest-news -->
 
-
-伝統工芸の未来を拓く、研究と実践の拠点。
-九州各地の伝統工芸品、特に柿右衛門様式の陶器を中心とした研究を行っています。
+<!-- @nav-button センターについて.webp | センターについて | ?p=md/center/index.md -->
+<!-- @nav-button 柿右衛門.webp | 柿右衛門 | ?p=md/kakiemon/index.md -->
+<!-- @nav-button 地域産業.webp | 地域産業 | ?p=md/local-industry/index.md -->
+<!-- @nav-button お知らせ.webp | お知らせ | ?p=md/news/index.md -->

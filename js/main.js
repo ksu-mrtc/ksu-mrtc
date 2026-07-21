@@ -236,6 +236,9 @@ ${item.image ? `<img src="${item.image}" alt="${item.title}" class="news-image">
             const mainContainer = document.createElement('main');
             mainContainer.className = 'site-main';
             
+            // Process nav-button comment components
+            contentMarkdown = processNavButtonComponents(contentMarkdown);
+
             // Generate content HTML first
             let htmlContent = md.render(contentMarkdown);
 
@@ -514,5 +517,63 @@ ${item.image ? `<img src="${item.image}" alt="${item.title}" class="news-image">
             }
         });
         return { attributes, body };
+    }
+
+    /**
+     * Nav Button Component Plugin Logic
+     * Parses <!-- @nav-button image | title | link --> comment tags in markdown and converts them to grid components.
+     */
+    function processNavButtonComponents(markdownText) {
+        if (!markdownText) return markdownText;
+
+        // Helper to resolve image path using simple image names
+        function resolveImagePath(imageName) {
+            if (!imageName) return '';
+            const trimmed = imageName.trim();
+            if (trimmed.startsWith('http://') || trimmed.startsWith('https://') || trimmed.startsWith('/')) {
+                return trimmed;
+            }
+            if (trimmed.startsWith('images/')) {
+                return trimmed;
+            }
+            // If sub-directory is provided like "top/banner.jpg"
+            if (trimmed.includes('/')) {
+                return `images/${trimmed}`;
+            }
+            // Default to images/nav/ or images/
+            return `images/nav/${trimmed}`;
+        }
+
+        // Pattern for matching consecutive nav-button comment tags
+        const navButtonBlockRegex = /(?:<!--\s*@nav-button\s+[\s\S]*?-->[\r\n\s]*)+/gi;
+
+        return markdownText.replace(navButtonBlockRegex, (blockMatch) => {
+            const singleTagRegex = /<!--\s*@nav-button\s+([\s\S]*?)-->/gi;
+            let cardsHtml = '';
+            let match;
+
+            while ((match = singleTagRegex.exec(blockMatch)) !== null) {
+                const rawParams = match[1].trim();
+                const parts = rawParams.split('|').map(p => p.trim());
+                
+                const rawImage = parts[0] || '';
+                const title = parts[1] || '';
+                const link = parts[2] || '#';
+
+                const imageUrl = resolveImagePath(rawImage);
+
+                cardsHtml += `
+<a href="${link}" class="nav-button-card">
+    <img src="${imageUrl}" alt="${title}" class="nav-button-card__image">
+    <div class="nav-button-card__overlay">
+        <h3 class="nav-button-card__title">${title}</h3>
+    </div>
+</a>`;
+            }
+
+            if (!cardsHtml) return blockMatch;
+
+            return `\n<div class="nav-buttons-grid">\n${cardsHtml}\n</div>\n`;
+        });
     }
 });
