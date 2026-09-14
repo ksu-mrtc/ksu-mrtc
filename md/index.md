@@ -9,7 +9,7 @@ navTitle: "伝み"
 
 <!-- @latest-news -->
 
-<!-- @nav-button センターについて.webp | センターについて | ?p=md/center/index.md -->
-<!-- @nav-button 柿右衛門.webp | 柿右衛門 | ?p=md/kakiemon/index.md -->
-<!-- @nav-button 地域産業.webp | 地域産業 | ?p=md/local-industry/index.md -->
-<!-- @nav-button お知らせ.webp | お知らせ | ?p=md/news/index.md -->
+<!-- @nav-button center.webp | センターについて | ?p=md/center/index.md -->
+<!-- @nav-button kakiemon.webp | 柿右衛門 | ?p=md/kakiemon/index.md -->
+<!-- @nav-button local-industry.webp | 地域産業 | ?p=md/local-industry/index.md -->
+<!-- @nav-button news.webp | お知らせ | ?p=md/news/index.md -->
