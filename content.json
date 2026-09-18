@@ -1,0 +1,160 @@
+[
+  {
+    "url": "/center/",
+    "path": "md/center/index.md",
+    "title": "センターについて",
+    "navTitle": "センターについて",
+    "navOrder": "1"
+  },
+  {
+    "url": "/center/member/",
+    "path": "md/center/member/index.md",
+    "title": "製作メンバー",
+    "collection": "member"
+  },
+  {
+    "url": "/",
+    "path": "md/index.md",
+    "title": "Home",
+    "navTitle": "伝み"
+  },
+  {
+    "url": "/kakiemon/",
+    "path": "md/kakiemon/index.md",
+    "title": "十五代 酒井田柿右衛門について",
+    "navTitle": "柿右衛門",
+    "navOrder": "3"
+  },
+  {
+    "url": "/local-industry/",
+    "path": "md/local-industry/index.md",
+    "title": "地域産業",
+    "navTitle": "地域産業",
+    "navOrder": "4"
+  },
+  {
+    "url": "/local-industry/test-sub/",
+    "path": "md/local-industry/test-sub/index.md",
+    "title": "テスト用地域産業サブページ",
+    "navTitle": "ヘッダーに載らないはずのタイトル"
+  },
+  {
+    "url": "/news/",
+    "path": "md/news/index.md",
+    "title": "News",
+    "collection": "news",
+    "navTitle": "お知らせ",
+    "navOrder": "2"
+  },
+  {
+    "url": "/research/",
+    "path": "md/research/index.md",
+    "title": "Research",
+    "collection": "research"
+  },
+  {
+    "url": "/center/member/井上貢一",
+    "path": "md/center/member/井上貢一.md",
+    "title": "井上 貢一",
+    "category": "member",
+    "description": "芸術学部 ソーシャルデザイン学科 / 芸術研究科"
+  },
+  {
+    "url": "/center/member/佐藤蒼",
+    "path": "md/center/member/佐藤蒼.md",
+    "title": "佐藤 蒼",
+    "category": "member",
+    "description": "芸術学部 芸術表現学科"
+  },
+  {
+    "url": "/center/member/森山海莉",
+    "path": "md/center/member/森山海莉.md",
+    "title": "森山 海莉",
+    "category": "member",
+    "description": "芸術学部 ソーシャルデザイン学科"
+  },
+  {
+    "url": "/center/member/渡邊和幸",
+    "path": "md/center/member/渡邊和幸.md",
+    "title": "渡邊 和幸",
+    "category": "member",
+    "description": "芸術研究科 造形表現専攻"
+  },
+  {
+    "url": "/center/member/福井涼",
+    "path": "md/center/member/福井涼.md",
+    "title": "福井 涼",
+    "category": "member",
+    "description": "芸術学部 ソーシャルデザイン学科"
+  },
+  {
+    "url": "/center/member/竹之内優希",
+    "path": "md/center/member/竹之内優希.md",
+    "title": "竹之内 優希",
+    "category": "member",
+    "description": "芸術学部 ソーシャルデザイン学科"
+  },
+  {
+    "url": "/center/member/酒井菫",
+    "path": "md/center/member/酒井菫.md",
+    "title": "酒井 菫",
+    "category": "member",
+    "description": "芸術研究科 造形表現専攻"
+  },
+  {
+    "url": "/center/member/青木暁光",
+    "path": "md/center/member/青木暁光.md",
+    "title": "青木 暁光",
+    "category": "member",
+    "description": "芸術研究科 造形表現専攻"
+  },
+  {
+    "url": "/news/2024-10-31",
+    "path": "md/news/2024-10-31.md",
+    "title": "「柿右衛門様式窯」で71回目の窯開き",
+    "date": "2024-10-31",
+    "category": "news",
+    "description": "本学柿右衛門様式窯で71回目の窯開きが行われ、制作した約500点の作品が窯出しされました。"
+  },
+  {
+    "url": "/research/kakiemon-red",
+    "path": "md/research/kakiemon-red.md",
+    "title": "柿右衛門様式の赤絵における発色メカニズムの研究",
+    "date": "2024-12-15",
+    "category": "research"
+  },
+  {
+    "url": "/news/2025-07-28",
+    "path": "md/news/2025-07-28.md",
+    "title": "「柿右衛門様式窯」で72回目の窯開き",
+    "date": "2025-07-28",
+    "category": "news",
+    "description": "本学柿右衛門様式窯で72回目の窯開きが行われ、制作した約500点の作品が窯出しされました。"
+  },
+  {
+    "url": "/news/2025-10-24",
+    "path": "md/news/2025-10-24.md",
+    "title": "「柿右衛門様式窯」で73回目の窯開き",
+    "date": "2025-10-24",
+    "category": "news",
+    "description": "本学柿右衛門様式窯で73回目の窯開きが行われ、学生や公開講座参加者が制作した個性豊かな約500点の作品が窯出しされました。"
+  },
+  {
+    "url": "/news/2025-12-15",
+    "path": "md/news/2025-12-15.md",
+    "title": "第2回伝統みらい研究セミナーを開催！",
+    "date": "2025-12-15",
+    "category": "news",
+    "description": "有田焼ブランド「麟 Lin」を手がける有限会社金照堂が、伝統工芸のブランド戦略と10年にわたる挑戦を語りました。",
+    "image": "images/news/2025.12.15_1.jpg"
+  },
+  {
+    "url": "/news/2026-02-18",
+    "path": "md/news/2026-02-18.md",
+    "title": "柿右衛門窯380年の技法を当主が伝授",
+    "date": "2026-02-18",
+    "category": "news",
+    "description": "大学院生11名が十五代酒井田柿右衛門客員教授から有田焼の歴史・制作背景について学びました。",
+    "image": "images/news/2026.2.18_1.jpg"
+  }
+]
