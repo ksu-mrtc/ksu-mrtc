@@ -5,3 +5,6 @@ content.json
 node_modules/
 package.json
 package-lock.json
+
+# 配布用に生成する。容量が大きく、manual.html から作り直せるため追跡しない
+manual.pdf

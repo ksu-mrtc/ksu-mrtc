@@ -1,0 +1,1041 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>ウェブサイト更新 操作マニュアル</title>
+<style>
+@page { size: A4; margin: 18mm 16mm 20mm 16mm; }
+
+:root { --ink:#111; --sub:#444; --rule:#bbb; --hair:#e0e0e0; --mark:#f2f4f3; }
+
+body {
+  font-family: "Hiragino Mincho ProN", "Yu Mincho", serif;
+  font-size: 10.5pt; line-height: 1.85; color: var(--ink);
+  margin: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact;
+}
+
+h1 { font-size: 20pt; line-height:1.4; margin: 0 0 1.2em; padding-bottom:.5em; border-bottom: 2px solid var(--ink); }
+
+/* 章は必ず改ページして始める。章末には書き込みの余白が残る（PL-23） */
+h2 {
+  font-size: 15pt; margin: 0 0 1em; padding: .4em 0 .4em .6em;
+  border-left: 5px solid var(--ink); background: var(--mark);
+  break-before: page; page-break-before: always;
+}
+h2:first-of-type { break-before: auto; page-break-before: auto; }
+
+h3 { font-size: 12.5pt; margin: 2.2em 0 .7em; padding-bottom:.3em; border-bottom: 1px solid var(--rule); }
+h4 { font-size: 11pt; margin: 1.8em 0 .5em; }
+h2, h3, h4 { break-after: avoid; page-break-after: avoid; font-family: "Hiragino Sans", sans-serif; }
+
+p, li { orphans: 3; widows: 3; }
+ul, ol { padding-left: 1.6em; }
+li { margin: .35em 0; }
+
+/* ファイル名・入力する文字。印刷しても枠が残るようにする（PL-21） */
+code {
+  font-family: "SF Mono", Menlo, Consolas, monospace; font-size: .88em;
+  border: 1px solid #999; border-radius: 3px; padding: .08em .35em;
+  background: #fff; white-space: nowrap;
+}
+pre { break-inside: avoid; page-break-inside: avoid; background: #fafafa;
+      border: 1px solid var(--rule); border-radius: 4px; padding: .9em 1.1em; overflow-x: auto; }
+pre code { border: none; padding: 0; background: none; white-space: pre; font-size: .85em; }
+
+strong { font-weight: 700; }
+
+table { border-collapse: collapse; width: 100%; margin: 1.1em 0;
+        break-inside: avoid; page-break-inside: avoid; font-size: .94em; }
+th, td { border: 1px solid var(--rule); padding: .5em .7em; text-align: left; vertical-align: top; }
+th { background: var(--mark); font-family: "Hiragino Sans", sans-serif; font-weight: 600; }
+
+blockquote { margin: 1.1em 0; padding: .7em 1.1em; border-left: 3px solid var(--rule);
+             background: #fbfbfb; color: var(--sub); font-size: .95em; break-inside: avoid; }
+
+hr { border: none; border-top: 1px solid var(--hair); margin: 2em 0; }
+
+a { color: inherit; text-decoration: underline; }
+
+.print-note { font-family:"Hiragino Sans",sans-serif; font-size:9pt; color:var(--sub);
+              border:1px dashed var(--rule); border-radius:4px; padding:.7em 1em; margin: 0 0 2em; }
+@media print { .print-note { display: none; } }
+</style>
+</head>
+<body>
+<div class="print-note">
+  このページはそのまま印刷できます。ブラウザの印刷（Windows：〔Ctrl〕＋〔P〕／Mac：〔⌘〕＋〔P〕）から、
+  用紙A4・余白「既定」で出力してください。「背景のグラフィック」を有効にすると、表の罫線と枠が紙にも出ます。
+  章ごとに改ページされ、章の終わりには書き込みの余白が残ります。
+</div>
+<h1>ウェブサイト更新 操作マニュアル</h1>
+<p>伝統みらい研究センター Webサイト（サーバーレス・アーカイブシステム）</p>
+<ul>
+<li>版：第1.1版　作成日：2026年8月　<strong>改訂日：2026年9月</strong></li>
+<li>画面の説明は 2026年8月時点の GitHub の画面に基づきます。ボタンの位置や英語表記は今後変わる可能性がありますが、「ファイルを開く → 編集する → Commit で保存する」という流れ自体は変わりません。</li>
+</ul>
+<h2>目次</h2>
+<ul>
+<li>この冊子の読み方（書き分けの約束・編集してはいけない場所）</li>
+<li>やりたいことから引く（索引）</li>
+</ul>
+<ol>
+<li>はじめに（考え方・用語・触ってよい場所）</li>
+<li>準備（パソコンの基本操作・ログイン・保管庫を開く・画面の見方）</li>
+<li>基本操作（記事の修正・作成・画像・公開・確認・取り下げ）</li>
+<li>困ったとき（Q&amp;A）</li>
+<li>少し進んだ操作（読まなくても運用できます）</li>
+</ol>
+<ul>
+<li>付録A　新規記事テンプレート／付録B　Markdownチートシート／付録C　更新チェックリスト</li>
+</ul>
+<hr>
+<h2>この冊子の読み方</h2>
+<h3>書き分けの約束</h3>
+<p>本文に出てくるアルファベットは、<strong>見た目で種類を分けています。</strong></p>
+<table>
+<thead>
+<tr>
+<th>書き方</th>
+<th>指しているもの</th>
+<th>例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>枠で囲った文字</code></td>
+<td>ファイル名・フォルダ名・実際に入力する文字</td>
+<td><code>md/news/2026-09-01.md</code></td>
+</tr>
+<tr>
+<td><strong>太い文字</strong></td>
+<td>画面上で押すボタンやリンク</td>
+<td><strong>Commit changes</strong></td>
+</tr>
+<tr>
+<td>〔　〕でくくった文字</td>
+<td>キーボードのキー</td>
+<td>〔Ctrl〕＋〔R〕</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>印刷したり他のソフトへ貼り付けたりすると、枠や太字が消えることがあります。そのときは〔　〕だけが残るので、<strong>キーボードのキーかどうか</strong>はそれで見分けられます。</p>
+</blockquote>
+<h3>編集してはいけない場所</h3>
+<p>次の3つだけは触らないでください。<strong>これ以外は、間違えても元に戻せます</strong>（→ 4.3節）。</p>
+<ul>
+<li><code>md/parts/header.md</code> … 自動で作り直されるため、直しても消えます</li>
+<li><code>content.json</code> … 同上</li>
+<li><code>index.html</code>・<code>js/</code>・<code>css/</code>・<code>scripts/</code>・<code>.github/</code> … サイトの仕組み本体です</li>
+</ul>
+<p><code>slideshow.json</code> は、5.2節の手順のときだけ編集します。
+場所ごとの扱いの一覧は <strong>1.3節</strong>にあります。</p>
+<hr>
+<h2>やりたいことから引く</h2>
+<p><strong>目次ではなく、こちらから探してください。</strong> やりたいことが決まっているときは、この表がいちばん早く着きます。</p>
+<table>
+<thead>
+<tr>
+<th>したいこと</th>
+<th>読むところ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>はじめてなので、まず1回やってみたい</td>
+<td><strong>3章の冒頭</strong></td>
+</tr>
+<tr>
+<td>記事の文章を直したい</td>
+<td><strong>3.2節</strong></td>
+</tr>
+<tr>
+<td>新しいお知らせを書きたい</td>
+<td><strong>3.3節</strong> ＋ 付録A</td>
+</tr>
+<tr>
+<td>お知らせ以外（研究成果など）に記事を足したい</td>
+<td><strong>3.3節</strong></td>
+</tr>
+<tr>
+<td>写真を載せたい</td>
+<td><strong>3.5節</strong></td>
+</tr>
+<tr>
+<td>写真を差し替えたい・消したい</td>
+<td><strong>3.5節</strong></td>
+</tr>
+<tr>
+<td>保存のしかたが分からない</td>
+<td><strong>3.6節</strong></td>
+</tr>
+<tr>
+<td>ちゃんと公開されたか確かめたい</td>
+<td><strong>3.7節</strong></td>
+</tr>
+<tr>
+<td>記事をしばらく一覧から外したい</td>
+<td><strong>3.8節 ①</strong></td>
+</tr>
+<tr>
+<td>書きかけの部分だけ伏せておきたい</td>
+<td><strong>3.8節 ②</strong></td>
+</tr>
+<tr>
+<td>記事を完全に消したい</td>
+<td><strong>3.8節 ③</strong></td>
+</tr>
+<tr>
+<td>消してしまったので元に戻したい</td>
+<td><strong>4.3節</strong></td>
+</tr>
+<tr>
+<td>保存したのにサイトに反映されない</td>
+<td><strong>4.1節</strong></td>
+</tr>
+<tr>
+<td>一覧に出ない・表示が崩れた</td>
+<td><strong>4.2節</strong></td>
+</tr>
+<tr>
+<td>いま自分がどこを見ているのか分からない</td>
+<td><strong>2.4節</strong></td>
+</tr>
+<tr>
+<td>画面のスクロールや日本語入力ができない</td>
+<td><strong>2.1節</strong></td>
+</tr>
+<tr>
+<td>トップページのスライドショーを替えたい</td>
+<td><strong>5.2節</strong></td>
+</tr>
+<tr>
+<td>メニューからページごと外したい ※管理者向け</td>
+<td><strong>5.3節</strong></td>
+</tr>
+<tr>
+<td>誰がいつ直したのか知りたい</td>
+<td><strong>5.1節</strong></td>
+</tr>
+<tr>
+<td>どうしても解決しないので人に聞きたい</td>
+<td><strong>4.4節</strong></td>
+</tr>
+<tr>
+<td>書いてある英字がファイル名かボタンか分からない</td>
+<td><strong>この冊子の読み方</strong></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>1. はじめに</h2>
+<h3>1.1 この仕組みの考え方</h3>
+<p>このウェブサイトは、<strong>文章ファイル（Markdownファイル）を書いて保存するだけで更新される</strong>仕組みです。ログインして使う「管理画面」はありません。更新は次の3ステップだけです。</p>
+<ol>
+<li>ブラウザで GitHub を開き、記事を文章ファイルとして書く</li>
+<li>「Commit changes（コミット）」ボタンで保存する</li>
+<li>あとは自動処理が動き、<strong>1〜2分でサイトに反映される</strong>（トップページや記事一覧も自動で更新されます）</li>
+</ol>
+<p>書いた記事はただの文章ファイルとして残り続けるので、サービスが変わってもデータは失われず、特別なソフトがなくても開けます。</p>
+<h3>1.2 用語のミニ辞典</h3>
+<table>
+<thead>
+<tr>
+<th>用語</th>
+<th>意味（言い換え）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GitHub（ギットハブ）</td>
+<td>ファイルを保管・公開してくれるウェブサービス。ブラウザで開いて使います</td>
+</tr>
+<tr>
+<td>リポジトリ</td>
+<td>このサイトのファイル一式が入っている「保管庫（フォルダ）」</td>
+</tr>
+<tr>
+<td>Markdown（マークダウン）</td>
+<td><code>#</code> や <code>-</code> などの簡単な記号で見出しや箇条書きを表す、文章の書き方</td>
+</tr>
+<tr>
+<td>コミット（Commit）</td>
+<td><strong>保存して、変更の記録を残すこと</strong>。コミットすると公開処理が自動で始まります</td>
+</tr>
+<tr>
+<td>Frontmatter（フロントマター）</td>
+<td>記事ファイルの先頭に書く「記事の情報カード」。タイトルや日付を書きます</td>
+</tr>
+</tbody>
+</table>
+<h3>1.3 触ってよい場所・いけない場所（必ず最初に読んでください）</h3>
+<table>
+<thead>
+<tr>
+<th>場所</th>
+<th>扱い</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>md/</code> フォルダの中の記事ファイル</td>
+<td>○ <strong>編集するのはここだけ</strong>です</td>
+</tr>
+<tr>
+<td><code>images/</code> フォルダ</td>
+<td>○ 画像の追加はここに行います</td>
+</tr>
+<tr>
+<td><code>md/parts/footer.md</code></td>
+<td>○ ページ下部（フッター）の文面。編集できます</td>
+</tr>
+<tr>
+<td><code>md/parts/header.md</code></td>
+<td>× <strong>編集しない</strong>。自動で作り直されるため、直しても消えます</td>
+</tr>
+<tr>
+<td><code>content.json</code></td>
+<td>× <strong>編集しない</strong>。保存のたびに自動で作り直されるため、直しても消えます</td>
+</tr>
+<tr>
+<td><code>slideshow.json</code></td>
+<td>△ トップページのスライドショーの設定。<strong>5.2節の手順のときだけ</strong>編集します</td>
+</tr>
+<tr>
+<td><code>index.html</code>・<code>js/</code>・<code>css/</code>・<code>scripts/</code>・<code>.github/</code></td>
+<td>× サイトの仕組み本体です。触らないでください</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>万一、間違って触ってしまっても、あとから元に戻せます（→ 4.3節）。こわがらなくて大丈夫です。</p>
+</blockquote>
+<hr>
+<h2>2. 準備</h2>
+<p><strong>いまの画面はどうなっていますか。</strong> 当てはまる行から読んでください。最初から順に読む必要はありません。</p>
+<table>
+<thead>
+<tr>
+<th>いまの状態</th>
+<th>読むところ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>パソコンやブラウザの操作そのものに不安がある</td>
+<td><strong>2.1節</strong></td>
+</tr>
+<tr>
+<td>ブラウザは開いているが、GitHub にログインしていない</td>
+<td><strong>2.2節</strong></td>
+</tr>
+<tr>
+<td>GitHub は開いているが、どのページを見ているのか分からない</td>
+<td><strong>2.4節</strong></td>
+</tr>
+<tr>
+<td>リポジトリ（<code>ksu-mrtc</code>）のファイル一覧が出ている</td>
+<td>準備は済んでいます。<strong>第3章</strong>へ進んでください</td>
+</tr>
+</tbody>
+</table>
+<h3>2.1 パソコンの基本操作（Windows / Mac）</h3>
+<p><strong>この節は、パソコンの操作そのものに不安があるときだけ読んでください。</strong> 慣れている方は 2.2節へ進んでください。</p>
+<table>
+<thead>
+<tr>
+<th>したいこと</th>
+<th>Windows</th>
+<th>Mac</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>画面を上下に動かす（スクロール）</td>
+<td>マウスのホイールを回す／タッチパッドを<strong>2本の指</strong>で上下になぞる</td>
+<td>トラックパッドを<strong>2本の指</strong>で上下になぞる／マウスのホイールを回す</td>
+</tr>
+<tr>
+<td>日本語と英数字を切り替える</td>
+<td>キーボード左上の <strong>半角/全角</strong> キーを押す（押すたびに入れ替わります）</td>
+<td>スペースキーの<strong>左隣</strong>の <strong>英数</strong> キーで英数字、<strong>右隣</strong>の <strong>かな</strong> キーで日本語</td>
+</tr>
+<tr>
+<td>いま日本語入力かどうか確かめる</td>
+<td>画面右下に <code>A</code>（英数）／<code>あ</code>（日本語）と出ています</td>
+<td>画面右上に <code>A</code>（英数）／<code>あ</code>（日本語）と出ています</td>
+</tr>
+<tr>
+<td>文字を選ぶ</td>
+<td>選びたい範囲をマウスでなぞる</td>
+<td>同じ</td>
+</tr>
+<tr>
+<td>コピーする／貼り付ける</td>
+<td>〔Ctrl〕＋〔C〕 ／ 〔Ctrl〕＋〔V〕</td>
+<td>〔⌘〕＋〔C〕 ／ 〔⌘〕＋〔V〕</td>
+</tr>
+<tr>
+<td>全部を選ぶ</td>
+<td>〔Ctrl〕＋〔A〕</td>
+<td>〔⌘〕＋〔A〕</td>
+</tr>
+<tr>
+<td>直前の操作を取り消す</td>
+<td>〔Ctrl〕＋〔Z〕</td>
+<td>〔⌘〕＋〔Z〕</td>
+</tr>
+<tr>
+<td>画面を読み直す（再読み込み）</td>
+<td>〔Ctrl〕＋〔R〕（それでも古いままなら 〔Ctrl〕＋〔Shift〕＋〔R〕）</td>
+<td>〔⌘〕＋〔R〕（それでも古いままなら 〔⌘〕＋〔Shift〕＋〔R〕）</td>
+</tr>
+<tr>
+<td>文字が小さくて読みにくい</td>
+<td>〔Ctrl〕を押しながらホイールを回す／〔Ctrl〕＋〔0〕 で元の大きさ</td>
+<td>〔⌘〕と〔＋〕で大きく／〔⌘〕＋〔0〕 で元の大きさ</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Mac でトラックパッドをなぞる向きと画面の動く向きが逆に感じるとき</strong>は、「システム設定」→「トラックパッド」→「スクロールの方向：ナチュラル」で切り替えられます。使いやすいほうで構いません。</p>
+</blockquote>
+<blockquote>
+<p>記事を書くときは<strong>日本語入力</strong>、ファイル名や情報カードを書くときは<strong>英数字入力</strong>に切り替えます。全角の数字（<code>２０２６</code>）が混じると日付として扱われません（→ 3.3節・付録C）。</p>
+</blockquote>
+<h3>2.2 GitHub にログインする</h3>
+<ol>
+<li>ブラウザ（Edge や Chrome）で <code>https://github.com/</code> を開きます。</li>
+<li>右上の「<strong>Sign in</strong>」を押し、配布されたユーザー名（メールアドレス）とパスワードを入力します。</li>
+<li>パスワードを忘れたときは、Sign in 画面の「Forgot password?」から再設定できます（登録メールアドレスに案内が届きます）。</li>
+<li>「本人確認コード」の入力を求められた場合は、登録メールアドレスに届いた数桁のコードを入力してください。</li>
+</ol>
+<h3>2.3 サイトの保管庫（リポジトリ）を開く</h3>
+<ol>
+<li>リポジトリ（ファイルの保管場所）のURL：<strong><code>https://github.com/ksu-mrtc/ksu-mrtc</code></strong> を開きます。</li>
+<li><strong>このページをブックマーク（お気に入り登録）してください。</strong> 毎回ここから作業を始めます。</li>
+<li>公開されているサイト本体のURL：<strong><code>https://ksu-mrtc.github.io/ksu-mrtc/</code></strong> もあわせてブックマークしておくと、更新結果の確認（→ 3.7節）がすぐにできます。</li>
+</ol>
+<h3>2.4 画面の見方と、いまいる場所の確かめ方</h3>
+<p>リポジトリを開くと、ファイルとフォルダの一覧が表示されます。よく使う表示・ボタンは次の通りです。</p>
+<table>
+<thead>
+<tr>
+<th>画面の表記</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>フォルダのアイコン＋名前（例 <code>md</code>）</td>
+<td>フォルダ。クリックで中に入れます</td>
+</tr>
+<tr>
+<td>画面上部のパス表示（例 <code>md / news</code>）</td>
+<td>いまいる場所（→ 下の「いま自分がどこにいるか」）</td>
+</tr>
+<tr>
+<td>✏️（鉛筆アイコン）／ Edit</td>
+<td>このファイルを編集する</td>
+</tr>
+<tr>
+<td><strong>Add file</strong> → <strong>Create new file</strong></td>
+<td>新しいファイルを作る</td>
+</tr>
+<tr>
+<td><strong>Add file</strong> → <strong>Upload files</strong></td>
+<td>手元のファイル（画像など）を追加する</td>
+</tr>
+<tr>
+<td><strong>Commit changes...</strong></td>
+<td>保存する（＝公開処理が始まる）</td>
+</tr>
+<tr>
+<td><strong>History</strong></td>
+<td>このファイルの変更履歴を見る</td>
+</tr>
+<tr>
+<td><strong>Actions</strong>（画面上部のタブ）</td>
+<td>自動処理の実行状況を見る</td>
+</tr>
+</tbody>
+</table>
+<h4>いま自分がどこにいるか</h4>
+<p>画面の上のほうに、いまいる場所が左から順に並んでいます。</p>
+<pre><code>ksu-mrtc / md / news / 2026-07-15.md
+</code></pre>
+<ul>
+<li>左から「<strong>保管庫 → フォルダ → フォルダ → ファイル</strong>」と入れ子になっています。上の例は、<code>md</code> フォルダの中の <code>news</code> フォルダの中にある <code>2026-07-15.md</code> というファイルを開いている状態です。</li>
+<li><strong>名前をクリックすると、その場所まで戻れます。</strong> <code>md</code> をクリックすれば <code>md</code> フォルダの一覧に戻ります。</li>
+<li><strong>一番左（<code>ksu-mrtc</code>）をクリックすると、リポジトリのトップに戻ります。</strong> 2.3節でブックマークした画面と同じ場所です。</li>
+</ul>
+<blockquote>
+<p><strong>どこにいるか分からなくなったら</strong>、一番左を押してトップに戻り、<code>md</code> フォルダから入り直してください。これが一番確実です（ファイルの探し方 → 3.1節）。</p>
+</blockquote>
+<hr>
+<h2>3. 基本操作</h2>
+<h3>まず1回、やってみる（所要 5分ほど）</h3>
+<p>いきなり新しい記事を書く必要はありません。<strong>すでにある記事の文字を1つ直して公開する</strong>のが、いちばん短い一巡です。ここを一度通せば、あとの作業はその繰り返しになります。</p>
+<ol>
+<li>リポジトリのトップから <code>md</code> → <code>news</code> と開き、記事ファイルを1つクリックする（→ 3.1節）</li>
+<li>右上の <strong>✏️</strong> を押して、本文の文字をどこか1つ直す（→ 3.2節）</li>
+<li><strong>Commit changes...</strong> を押して保存する（→ 3.6節）</li>
+<li>1〜2分待って、お知らせの一覧を開いて直っているか見る（→ 3.7節）</li>
+</ol>
+<p>うまくいかなくても、書き換える前の状態にいつでも戻せます（→ 4.3節）。</p>
+<blockquote>
+<p>実際の運用でも、<strong>新しい記事を書くより、すでにある記事を直す作業のほうが多くなります。</strong> まずこの一巡に慣れてください。</p>
+</blockquote>
+<h3>3.1 記事ファイルの置き場所と探し方</h3>
+<p>記事はすべて <code>md/</code> フォルダの中に、種類ごとのフォルダで整理されています。</p>
+<pre><code>md/
+├── index.md            … トップページ
+├── news/               … お知らせ　※記事を足すのは、ふだんここです
+│   ├── index.md        … お知らせの一覧ページ（記事は自動で並びます）
+│   └── 2026-02-18.md   … 記事1本が1ファイル
+├── center/             … 「センターについて」のページ
+│   └── member/         … 製作メンバーの紹介（1人1ファイル）
+├── kakiemon/           … 「柿右衛門」のページ
+├── local-industry/     … 「地域産業」のページ
+├── research/           … 研究成果の一覧と記事
+└── parts/              … ヘッダー・フッター部品（header.md は編集禁止）
+</code></pre>
+<ul>
+<li>図の右側の説明は、<strong>サイト上部のメニューの名前</strong>と対応しています。直したいページがどのフォルダか分からないときは、サイト側でそのページを開き、メニューのどの項目にあたるかを見てください。</li>
+<li>各フォルダの中の <code>index.md</code> は、そのコーナーのページ本体です。<code>md/</code> 直下の <code>index.md</code> はトップページです。</li>
+<li>お知らせ記事を探すときは、<code>md</code> → <code>news</code> の順にクリックして、ファイル名（日付入り）から目的の記事を開きます。</li>
+<li>ファイルをクリックすると中身が表示されます。この時点ではまだ「見ているだけ」で、何も変わりません。</li>
+</ul>
+<h3>3.2 既存の記事を修正する</h3>
+<ol>
+<li>3.1 の手順で、修正したい記事ファイルを開きます。</li>
+<li>画面右上の <strong>✏️（鉛筆アイコン）</strong> をクリックすると、編集画面に切り替わります。</li>
+<li>本文を修正します。書き方の記号は 3.4節の早見表を参照してください。</li>
+<li>右上の <strong>Commit changes...</strong> ボタンを押します。</li>
+<li>小さな窓が開くので、1行目（Commit message）に<strong>何をしたか一言</strong>を書きます（例：<code>お知らせの日付を修正</code>）。空欄のままでも保存できますが、あとで履歴を見返すときのために書くことをおすすめします。</li>
+<li>「<strong>Commit directly to the main branch</strong>」が選ばれていることを確認し、緑の <strong>Commit changes</strong> ボタンを押します。</li>
+<li>これで保存完了です。1〜2分後にサイトへ反映されます（確認方法 → 3.7節）。</li>
+</ol>
+<h3>3.3 新しい記事を作る</h3>
+<h4>どのフォルダに置くか、<code>category</code> に何を書くか</h4>
+<p>記事を置くフォルダと、情報カードの <code>category</code> に書く言葉は対応しています。</p>
+<table>
+<thead>
+<tr>
+<th>記事の種類</th>
+<th>置くフォルダ</th>
+<th><code>category</code> に書く言葉</th>
+<th>並ぶ一覧ページ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>お知らせ</td>
+<td><code>md/news/</code></td>
+<td><code>news</code></td>
+<td>「お知らせ」</td>
+</tr>
+<tr>
+<td>研究成果</td>
+<td><code>md/research/</code></td>
+<td><code>research</code></td>
+<td>「研究成果」</td>
+</tr>
+<tr>
+<td>製作メンバー</td>
+<td><code>md/center/member/</code></td>
+<td><code>member</code></td>
+<td>「製作メンバー」</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>一覧ページ（各フォルダの <code>index.md</code>）に書かれた <code>collection:</code> と、記事の <code>category:</code> が<strong>同じ言葉</strong>のときに、その記事が一覧に並びます。<code>category</code> の行を消すと一覧から外れるのは、このためです（→ 3.8節①）。</p>
+</blockquote>
+<blockquote>
+<p><code>kakiemon</code>・<code>local-industry</code> と、<code>center</code> の直下は、記事を並べる一覧を持たない<strong>1枚もののページ</strong>です。ここを直すときは新しく記事を作らず、3.2節の手順でそのフォルダの <code>index.md</code> を編集します。</p>
+</blockquote>
+<h4>手順</h4>
+<ol>
+<li><code>md</code> → <code>news</code> フォルダ（記事を置きたいフォルダ）を開きます。</li>
+<li>右上の <strong>Add file</strong> → <strong>Create new file</strong> をクリックします。</li>
+<li>一番上の欄に<strong>ファイル名</strong>を入力します（ルールは下記）。</li>
+<li>本文欄に、下のテンプレートを貼り付け、<strong><code>（　）</code> の部分をすべて書き換えます</strong>（かっこごと消します）。</li>
+<li><strong>Commit changes...</strong> → メッセージを書く → 緑の <strong>Commit changes</strong>（3.2 の手順4〜6と同じ）。</li>
+</ol>
+<h4>貼り付けるテンプレート（再掲）</h4>
+<pre><code>---
+title: &quot;（記事のタイトル）&quot;
+date: &quot;（2026-07-15 の形で日付を書く）&quot;
+category: &quot;news&quot;
+description: &quot;（一覧に表示される1〜2文の説明）&quot;
+image: &quot;images/news/（画像ファイル名）&quot;
+---
+
+## （見出し）
+
+（本文をここに書きます。段落を分けるときは空の行を1行はさみます）
+
+- （箇条書きの項目）
+- （箇条書きの項目）
+</code></pre>
+<p><strong><code>（　）</code> が入っている行は、かっこごと消して書き換えてください。</strong> 画像を使わない記事では <code>image:</code> の行ごと削除します。</p>
+<blockquote>
+<p>ここに載せたものと同じテンプレートが <strong>付録A</strong> にもあります。印刷して使うときは、そちらを切り離して手元に置くと、行き来せずに済みます。</p>
+</blockquote>
+<h4>ファイル名のルール</h4>
+<ul>
+<li><strong>半角の英数字とハイフン（-）だけ</strong>を使う。日本語・スペース・全角文字は使わない</li>
+<li><strong><code>日付-内容.md</code> の形にする</strong>　例：<code>2026-07-15-summer-event.md</code></li>
+<li>最後は必ず <code>.md</code> で終わる</li>
+<li><code>index.md</code> という名前は一覧ページ専用なので、<strong>記事には使わない</strong></li>
+</ul>
+<blockquote>
+<p>記事の並び順は情報カードの <code>date</code> で決まるため、ファイル名そのものは表示に影響しません。それでも<strong>日付から始めてください。</strong> あとからファイルを探すとき、名前だけで見分けられるようにするためです。</p>
+</blockquote>
+<h4>記事の情報カード（Frontmatter）の書き方</h4>
+<p>記事ファイルの先頭には、<code>---</code> で挟んだ「情報カード」を書きます。</p>
+<pre><code>---
+title: &quot;夏の企画展のお知らせ&quot;
+date: &quot;2026-07-15&quot;
+category: &quot;news&quot;
+description: &quot;8月1日から夏の企画展を開催します。&quot;
+image: &quot;images/news/2026-07-15-summer.jpg&quot;
+---
+</code></pre>
+<blockquote>
+<p>値は <code>&quot;</code>（半角の二重引用符）で囲むのがこのサイトの決まりです。既存の記事ファイルを開くと同じ書き方になっているので、迷ったらそちらを見本にしてください。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>意味</th>
+<th>書き方の注意</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>title</code></td>
+<td>記事のタイトル</td>
+<td>日本語でOK</td>
+</tr>
+<tr>
+<td><code>date</code></td>
+<td>日付</td>
+<td><strong>必ず <code>2026-07-15</code> の形式（年4桁-月2桁-日2桁）</strong>。この日付で一覧の並び順が決まります</td>
+</tr>
+<tr>
+<td><code>category</code></td>
+<td>記事の種類</td>
+<td>お知らせ記事は <code>news</code> と書きます（一覧に載せるための目印です）</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>一覧に表示される短い説明</td>
+<td>1〜2文まで。長文は本文へ</td>
+</tr>
+<tr>
+<td><code>image</code></td>
+<td>一覧に表示される画像</td>
+<td>画像の場所を書く（画像の追加方法 → 3.5節）。画像なしなら<strong>この行ごと削除</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>よくある書き間違い（表示が崩れる原因のほとんどはこれです）</strong></p>
+<ul>
+<li>「<code>:</code>（コロン）」のあとに<strong>半角スペースを1つ</strong>入れる（<code>title:夏の…</code> は×、<code>title: 夏の…</code> が○）</li>
+<li>コロンを<strong>全角（：）で書かない</strong>。必ず半角の <code>:</code></li>
+<li>値は<strong>半角の <code>&quot;</code> で囲む</strong>（<code>title: 夏の…</code> ではなく <code>title: &quot;夏の…&quot;</code>）。<code>&quot;</code> を閉じ忘れない</li>
+<li>1行目と最後の <code>---</code> を消さない（<code>---</code> は<strong>半角ハイフン3つ</strong>）</li>
+<li>日付を <code>2026/7/15</code> や <code>7月15日</code> と書かない</li>
+<li>各項目は<strong>1行におさめる</strong>（途中で改行しない）</li>
+</ul>
+<h3>3.4 Markdown記法の早見表（本文の書き方）</h3>
+<p><code>---</code> の下は、ふつうの文章として本文を書きます。よく使う記号は次の5つだけ覚えれば十分です。</p>
+<table>
+<thead>
+<tr>
+<th>したいこと</th>
+<th>書き方</th>
+<th>表示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>見出し</td>
+<td><code>## 開催概要</code></td>
+<td>大きめの見出しになる</td>
+</tr>
+<tr>
+<td>小見出し</td>
+<td><code>### 日時</code></td>
+<td>少し小さい見出し</td>
+</tr>
+<tr>
+<td>箇条書き</td>
+<td><code>- 項目名</code>（半角ハイフン＋半角スペース）</td>
+<td>・項目名</td>
+</tr>
+<tr>
+<td>太字</td>
+<td><code>**重要**</code></td>
+<td><strong>重要</strong></td>
+</tr>
+<tr>
+<td>リンク</td>
+<td><code>[センターの紹介](?p=md/center/index.md)</code></td>
+<td>クリックできる文字</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>段落を分けるときは、<strong>空の行を1行</strong>はさみます。</li>
+<li>記号（<code>#</code> <code>-</code> <code>*</code>）はすべて<strong>半角</strong>で、記号のあとに<strong>半角スペース</strong>が必要です。</li>
+<li>書いた文章を<strong>一時的に伏せたい</strong>ときは、その範囲を <code>&lt;!--</code> と <code>--&gt;</code> で挟みます。挟んだ部分は画面に出なくなりますが、文章はファイルの中に残ります（→ 3.8節②）。</li>
+</ul>
+<h3>3.5 画像を載せる</h3>
+<p>写真を記事に入れる作業は、<strong>2つに分かれています。</strong></p>
+<ol>
+<li>画像ファイルを <code>images</code> フォルダへ<strong>アップロードする</strong>（→ <strong>1回目のコミット</strong>）</li>
+<li>記事の中に、その画像の<strong>場所を書く</strong>（→ <strong>2回目のコミット</strong>）</li>
+</ol>
+<p><strong>保存は2回必要です。</strong> 順番もこのとおりで、先に画像を入れてから記事に書きます。</p>
+<h4>準備：アップロードする前に</h4>
+<p><strong>形式</strong>　<code>.jpg</code> または <code>.png</code> にしてください。<strong>iPhone の標準形式（HEIC）は、そのままではブラウザで表示できません。</strong> iPhone の写真を使うときは「設定 → カメラ → フォーマット →『互換性優先』」に変えて撮り直すか、いったんメールやLINEで送って変換されたものを使います。</p>
+<p><strong>大きさ</strong>　<strong>1枚あたり1MB以内</strong>、<strong>長辺1600px程度</strong>を目安に小さくしてから上げてください。カメラやスマートフォンの写真は1枚5〜25MBあり、そのまま上げるとページがなかなか開きません。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>縮小のしかた</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windows</td>
+<td>画像を右クリック →「プログラムから開く」→「フォト」→「…」→「画像のサイズ変更」</td>
+</tr>
+<tr>
+<td>Mac</td>
+<td>画像をダブルクリックして「プレビュー」で開く → メニューの「ツール」→「サイズを調整」</td>
+</tr>
+</tbody>
+</table>
+<p><strong>ファイル名</strong>　半角の英数字とハイフンだけにします（例：<code>2026-07-15-summer.jpg</code>）。日本語やスペースが入っているときは、<strong>アップロードする前に</strong>パソコン側で名前を変えてください。</p>
+<h4>① 画像をアップロードする（1回目のコミット）</h4>
+<ol>
+<li>
+<p>リポジトリのトップから <code>images</code> フォルダを開き、<strong>入れたいフォルダまで進みます</strong>（お知らせの写真なら <code>images</code> → <code>news</code>）。</p>
+<blockquote>
+<p><strong>ここが一番間違えやすいところです。</strong> <strong>Upload files</strong> は「<strong>いま開いているフォルダ</strong>」に画像を置きます。リポジトリのトップで押すとトップに置かれてしまい、記事から呼び出せません。いまどこにいるかは画面上部のパス表示で確かめられます（→ 2.4節）。</p>
+<p>入れたいフォルダが無いときは、担当者に相談してください（現在あるのは <code>news</code>・<code>kakiemon</code>・<code>slideshow</code> などです）。</p>
+</blockquote>
+</li>
+<li>
+<p><strong>Add file</strong> → <strong>Upload files</strong> をクリックします。</p>
+</li>
+<li>
+<p>画像を選びます。やりやすいほうで構いません。</p>
+<ul>
+<li>枠の中へ画像を<strong>ドラッグ＆ドロップ</strong>する</li>
+<li>枠の中の <strong>choose your files</strong> をクリックして、ファイルを選ぶ</li>
+</ul>
+</li>
+<li>
+<p>画面の下の緑の <strong>Commit changes</strong> を押します。<strong>これが1回目の保存です。</strong></p>
+</li>
+<li>
+<p>フォルダの一覧に画像ファイルが並んでいることを確かめます。</p>
+</li>
+</ol>
+<h4>② 記事に画像の場所を書く（2回目のコミット）</h4>
+<p>書き方は2つあり、<strong>役割が違います。同じものを2度書くわけではありません。</strong></p>
+<table>
+<thead>
+<tr>
+<th>書き方</th>
+<th>何に使うか</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>情報カードの <code>image:</code></td>
+<td><strong>一覧に並んだときの小さな写真</strong>（サムネイル）。記事の本文には出ません。1記事に<strong>1枚だけ</strong></td>
+</tr>
+<tr>
+<td>本文中の <code>![ ]( )</code></td>
+<td><strong>記事本文の中に出る写真</strong>。何枚でも置けます</td>
+</tr>
+</tbody>
+</table>
+<pre><code>---
+（略）
+image: &quot;images/news/2026-07-15-summer.jpg&quot;
+---
+
+## 当日の様子
+
+![会場に並んだ柿右衛門様式の皿](images/news/2026-07-15-summer.jpg)
+</code></pre>
+<ul>
+<li>場所は <code>images/</code> から、<strong>先頭から</strong>書きます。</li>
+<li>書けたら <strong>Commit changes</strong> で保存します。<strong>これが2回目の保存です。</strong></li>
+<li>表示の確認は3.7節の手順で行います。</li>
+</ul>
+<h4>写真の説明（<code>![ ]</code> の中に書く文字）</h4>
+<p>角かっこの中に書く文字は、<strong>写真が表示できないときに、代わりに出る文字</strong>です。あわせて、将来その画像ファイルが開けなくなったときに、<strong>それが何を写したものだったかを残す</strong>役割があります。</p>
+<ul>
+<li>×　<code>![写真の説明](images/news/2026-07-15-summer.jpg)</code></li>
+<li>○　<code>![会場に並んだ柿右衛門様式の皿](images/news/2026-07-15-summer.jpg)</code></li>
+</ul>
+<p><strong>「写真の説明」のままにせず、写っているものを短く書いてください。</strong></p>
+<h4>画像を差し替える・消す</h4>
+<ul>
+<li><strong>差し替える</strong>：新しい画像を①の手順でアップロードし、記事の中の場所を新しいファイル名に書き換えます。<strong>同じファイル名で上書きすると</strong>、ブラウザが古い画像を覚えていて、しばらく変わらないことがあります（強めの再読み込み → 2.1節）。</li>
+<li><strong>記事から外す</strong>：記事の中の <code>![ ]( )</code> の行、または <code>image:</code> の行を消します。画像ファイルそのものは <code>images</code> に残ります。</li>
+<li><strong>画像ファイルごと消す</strong>：<code>images</code> の中の画像を開き、「…」メニューの <strong>Delete file</strong> → <strong>Commit changes</strong>。<strong>その画像を使っている記事があると、そこが表示されなくなります。</strong> 先に記事側を直してください。</li>
+</ul>
+<h3>3.6 保存して公開する（Commit）</h3>
+<h4>保存する前に、プレビューで見え方を確かめる</h4>
+<p>編集画面の上のほうに <strong>Preview</strong> というタブがあります（隣は <strong>Edit</strong>）。</p>
+<ol>
+<li>本文を書き終えたら <strong>Preview</strong> タブをクリックします。</li>
+<li>見出し・箇条書き・リンク・画像が、思ったとおりに出ているか確かめます。</li>
+<li>直したいところがあれば <strong>Edit</strong> タブに戻って書き直します。</li>
+</ol>
+<blockquote>
+<p><strong>この仕組みは、書き間違いを自動では教えてくれません。</strong> 公開してしまう前に自分の目で確かめられるのは、ここです。
+なお、情報カード（<code>---</code> で挟んだ部分）はプレビューでは表のように表示されます。本文の見え方を確かめるための機能だと考えてください。</p>
+</blockquote>
+<h4>Commit で保存する</h4>
+<p>どの操作でも、最後は必ず <strong>Commit changes</strong> です。これが「保存ボタン」であり「公開ボタン」です。</p>
+<ol>
+<li><strong>Commit changes...</strong> を押す</li>
+<li>1行目に、何をしたか一言メモ（例：<code>夏の企画展の記事を追加</code>）</li>
+<li>「Commit directly to the main branch」が選ばれたまま、緑の <strong>Commit changes</strong> を押す</li>
+</ol>
+<blockquote>
+<p>コミットのたびに「いつ・誰が・何を変えたか」が自動で記録されます。この記録はあとからいつでも見られます（→ 5.1節）。</p>
+</blockquote>
+<h3>3.7 公開されたか確認する</h3>
+<ol>
+<li>コミット後、<strong>1〜2分待ちます</strong>。</li>
+<li>サイト本体を開き、<strong>書いた記事が並ぶ一覧ページ</strong>（お知らせ記事なら上部メニューの「お知らせ」）を開きます。</li>
+<li>ブラウザの<strong>再読み込み</strong>（Windows は 〔Ctrl〕＋〔R〕 または 〔F5〕／Mac は 〔⌘〕＋〔R〕）をします。</li>
+<li>一覧に記事が出ていれば成功です。<strong>記事名をクリックして</strong>、本文と画像も表示されるか確かめてください。</li>
+<li>すぐに反映されていないときは、リポジトリ画面上部の <strong>Actions</strong> タブを開きます。
+<ul>
+<li>実行中（黄色の●）→ もう少し待つ</li>
+<li>緑のチェック ✓ → 処理成功。ブラウザをもう一度再読み込み</li>
+<li>赤い × → 処理が失敗（→ 4.1節）</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p><strong>確認はトップページではなく、一覧ページで行ってください。</strong> トップページの「最新ニュース」に出るのは、お知らせのうち<strong>日付がいちばん新しい1件だけ</strong>です。しかも新しさを決めているのは保存した時刻ではなく、情報カードの <code>date</code> です。過去の日付を書いた記事は、<strong>正しく公開されていてもトップページには出ません。</strong></p>
+</blockquote>
+<h3>3.8 記事を一旦見えなくする／取り下げる</h3>
+<p>「見えなくしたい」には段階があります。<strong>どこまで見えなくしたいか</strong>で手順が変わるので、まず次の表で選んでください。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>したいこと</th>
+<th>操作</th>
+<th>元に戻すには</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>①</td>
+<td>しばらく一覧から外したい（文章は残す）</td>
+<td><code>category:</code> の行を消す</td>
+<td>行を書き戻す</td>
+</tr>
+<tr>
+<td>②</td>
+<td>書きかけの部分だけ伏せたい</td>
+<td>その範囲を <code>&lt;!--</code> と <code>--&gt;</code> で挟む</td>
+<td>記号を外す</td>
+</tr>
+<tr>
+<td>③</td>
+<td>記事ごと取り下げたい</td>
+<td><strong>Delete file</strong> で削除する</td>
+<td>4.3節の手順で戻す</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>①と②は「一覧に出さない」であって、「公開を取り消す」ではありません。</strong> 記事のURLを知っている人は、そのページを開けば読めます。人目に触れないようにしたいときは③を選んでください。</p>
+</blockquote>
+<h4>① 一覧から外す（ファイルは残す）</h4>
+<ol>
+<li>3.2節の手順で記事ファイルを開き、編集画面（鉛筆アイコン）にします。</li>
+<li>情報カードの中の <code>category: &quot;news&quot;</code> の行を、<strong>行ごと</strong>消します。</li>
+<li><strong>Commit changes</strong> で保存します（→ 3.6節）。</li>
+</ol>
+<p>1〜2分でお知らせ一覧とトップページの「最新ニュース」から消えます。戻したくなったら、同じ場所に <code>category: &quot;news&quot;</code> の行を書き戻してコミットすれば、また一覧に出ます。</p>
+<blockquote>
+<p>消すのは <code>category:</code> の<strong>1行だけ</strong>です。<code>---</code> の行や <code>title:</code> を消すと、ページの表示が崩れます（→ 4.2節）。</p>
+</blockquote>
+<h4>② 本文の一部だけ隠す</h4>
+<p>隠したい範囲を <code>&lt;!--</code> と <code>--&gt;</code> で挟みます。</p>
+<pre><code>&lt;!--
+この部分は画面に表示されません。
+書きかけの段落を、しばらく伏せておきたいときに使います。
+--&gt;
+</code></pre>
+<p>挟んだ部分は表示されませんが、<strong>文章はファイルの中に残っています。</strong> <code>&lt;!--</code> と <code>--&gt;</code> の2行を消せば、また表示されます。</p>
+<h4>③ 完全に取り下げる（削除）</h4>
+<ol>
+<li>削除したい記事ファイルを開きます。</li>
+<li>右上の <strong>「…」メニュー</strong>（または鉛筆アイコンの隣）から <strong>Delete file</strong> を選びます。</li>
+<li><strong>Commit changes</strong> で確定します。一覧からも自動で消えます。</li>
+</ol>
+<blockquote>
+<p><strong>消しても記録は残るので、あとから元に戻せます。</strong> 手順は 4.3節にあります。「消したら二度と戻らない」ということはありません。</p>
+</blockquote>
+<blockquote>
+<p><strong>ページごと（コーナーごと）メニューから外したいとき</strong>は、記事ではなくサイトの構成を変える操作になります。5.3節を見てください。</p>
+</blockquote>
+<hr>
+<h2>4. 困ったとき</h2>
+<h3>4.1 保存したのにサイトに反映されない</h3>
+<p>次の順で確認してください。</p>
+<ol>
+<li><strong>2分待ちましたか？</strong> 反映には時間がかかります。</li>
+<li><strong>再読み込みしましたか？</strong> ブラウザが古い表示を覚えていることがあります。Windows は 〔Ctrl〕＋〔R〕（それでもだめなら 〔Ctrl〕＋〔Shift〕＋〔R〕）、Mac は 〔⌘〕＋〔R〕（それでもだめなら 〔⌘〕＋〔Shift〕＋〔R〕）。</li>
+<li><strong>Actions タブは緑✓ですか？</strong> 赤×のときは処理が失敗しています。多くの場合、直前に保存したファイルの情報カード（Frontmatter）の書き間違いが原因です。4.2 のチェック項目を確認して修正・再コミットしてください。それでも赤×が続く場合は 4.4節へ。</li>
+</ol>
+<h3>4.2 記事が一覧に出ない・表示がおかしい</h3>
+<p>原因のほとんどは情報カードの書き間違いです。該当ファイルを開き、次を確認してください。</p>
+<ul>
+<li>[ ] 1行目が <code>---</code>（半角ハイフン3つ）で始まっているか。情報カードの終わりにも <code>---</code> があるか</li>
+<li>[ ] コロンは<strong>半角の <code>:</code></strong> か。コロンの後に<strong>半角スペース</strong>があるか</li>
+<li>[ ] 値は半角の <code>&quot;</code> で囲まれ、閉じ忘れがないか</li>
+<li>[ ] <code>date</code> は <code>2026-07-15</code> の形式か</li>
+<li>[ ] お知らせ記事なら <code>category: &quot;news&quot;</code> と書いてあるか（<code>News</code> や <code>ニュース</code> は×）</li>
+<li>[ ] <code>image</code> に書いた場所と、実際に画像を置いた場所が一致しているか（画像なしなら <code>image</code> の行ごと削除したか）</li>
+<li>[ ] ファイル名が半角英数字で、<code>.md</code> で終わっているか</li>
+</ul>
+<h3>4.3 間違えて保存してしまった（元に戻したい）</h3>
+<p>コミットの記録が残っているので、<strong>前の状態はいつでも見られます</strong>。</p>
+<ol>
+<li>該当ファイルを開き、右上の <strong>History</strong> をクリックします。</li>
+<li>変更の一覧が新しい順に並びます。<strong>戻したい時点（間違える前）の記録</strong>をクリックします。</li>
+<li>その時点のファイルの中身が表示されるので、本文を<strong>全部選択してコピー</strong>します。</li>
+<li>通常の手順（3.2節）でファイルを開いて編集し、中身をコピーした内容に<strong>貼り替えて</strong>コミットします。</li>
+</ol>
+<blockquote>
+<p>うまくいかないとき・ファイルを丸ごと消してしまったときは、無理をせず相談してください（→ 4.4節）。記録が残っているので、必ず復元できます。</p>
+</blockquote>
+<h3>4.4 どうしても解決しないとき（何を伝えればよいか）</h3>
+<p>自分だけで解決しようとせず、サイトの管理担当者に相談してください。そのとき、次の3つを伝えると原因をたどりやすくなります。</p>
+<ul>
+<li><strong>どのファイルを</strong>（例：<code>md/news/2026-07-15-summer.md</code>）</li>
+<li><strong>何をしようとして</strong>（例：新しいお知らせを追加しようとした）</li>
+<li><strong>どうなったか</strong>（エラー表示など、可能なら画面の写真）</li>
+</ul>
+<blockquote>
+<p>何をしても、<strong>コミットの記録は残っています。</strong> 取り返しのつかない状態にはならないので、慌てずに現状のまま相談してください。自己流で直そうとするより、そのほうが早く戻せます。</p>
+</blockquote>
+<hr>
+<h2>5. 少し進んだ操作（読まなくても運用できます）</h2>
+<h3>5.1 変更の記録を見る</h3>
+<ul>
+<li>ファイルごとの記録：ファイルを開いて <strong>History</strong>。「いつ・誰が・どんなメモで」変更したかの一覧が見られます。</li>
+<li>サイト全体の記録：リポジトリのトップで、ファイル一覧の上にある最新コミットの表示から <strong>「○○ commits」</strong> をクリック。</li>
+</ul>
+<p>すべての変更が自動で記録されているため、「誰かが触って壊れたまま分からなくなる」ことがありません。これがこの仕組みの安心材料のひとつです。</p>
+<h3>5.2 トップページのスライドショー画像を入れ替える</h3>
+<p>トップページで切り替わる大きな写真は、<strong><code>images/slideshow/</code> フォルダの中身ではなく、リポジトリのトップにある <code>slideshow.json</code> というファイルが決めています。</strong> 画像を上げただけでは表示されません。<strong>画像のアップロードと、<code>slideshow.json</code> の書き換えの両方</strong>が必要です。</p>
+<ol>
+<li>
+<p>3.5節①の手順で、<code>images</code> → <code>slideshow</code> フォルダに画像をアップロードします。</p>
+<ul>
+<li>スライドショーは画面いっぱいに表示されるため、<strong>長辺2000px程度・1MB以内</strong>を目安にしてください。</li>
+</ul>
+</li>
+<li>
+<p>リポジトリのトップに戻り、<strong><code>slideshow.json</code></strong> を開いて編集します。中身は次の形です。</p>
+<pre><code>[
+  {
+    &quot;src&quot;: &quot;images/slideshow/hakata-ningyo-01.jpg&quot;,
+    &quot;alt&quot;: &quot;黒い台座に並べられた博多人形。手前は十二単をまとった女性の人形&quot;
+  },
+  {
+    &quot;src&quot;: &quot;images/slideshow/tateito-03.jpg&quot;,
+    &quot;alt&quot;: &quot;手織機に張られた橙色の経糸と、織り上がりつつある緑と白の縞の織物&quot;
+  }
+]
+</code></pre>
+<ul>
+<li><code>src</code> … 画像の場所。<code>images/slideshow/</code> から先頭から書きます。</li>
+<li><code>alt</code> … <strong>その写真に何が写っているかの説明</strong>（→ 3.5節「写真の説明」）。</li>
+<li><strong>表示される順番は、ファイル名の順ではなく、この中に書いた順</strong>です。</li>
+<li>1枚分は <code>{ }</code> で挟んだ2行で、枚数分を <code>,</code>（半角カンマ）で区切って並べます。<strong>最後の1枚のうしろにはカンマを付けません。</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>Commit changes</strong> で保存します。</p>
+</li>
+</ol>
+<blockquote>
+<p><strong>画像を減らすときは、<code>slideshow.json</code> の側を先に直してください。</strong> 画像ファイルだけ <strong>Delete file</strong> で消すと、<code>slideshow.json</code> には場所が残ったままになり、トップページに<strong>壊れた写真の枠</strong>が出ます。</p>
+</blockquote>
+<h3>5.3 新しいコーナー（メニュー項目）を増やしたいとき ※管理者向け</h3>
+<p><code>md/</code> の直下に新しいフォルダを作り、その中に <code>index.md</code> を置いて、情報カードに <code>navTitle:</code>（メニューに表示する名前）と <code>navOrder:</code>（並び順の数字）を書くと、サイト上部のメニューに自動で追加されます。記事一覧を自動表示させたい場合は <code>collection:</code> に記事の <code>category</code> と同じ言葉を書きます。通常の記事更新では使わないため、詳細は管理者にご相談ください。</p>
+<h3>5.4 バックアップ（クローン）について ※管理者向け</h3>
+<p>このサイトの全データ（記事・画像・仕組みのすべて）は、リポジトリを「クローン（複製）」することで、手元のパソコンに丸ごとコピーできます。リポジトリのトップの緑の <strong>Code</strong> ボタン → <strong>Download ZIP</strong> でも一式を取得できます。定期的（例：月1回）に取得して保管しておくと、万一サービスに障害があってもサイト全体を復元できます。</p>
+<hr>
+<h2>付録A　新規記事テンプレート（コピーして使う）</h2>
+<p>書き方の説明は 3.3節にあります。ここは、貼り付けて使うためのテンプレートです。</p>
+<pre><code>---
+title: &quot;（記事のタイトル）&quot;
+date: &quot;（2026-07-15 の形で日付を書く）&quot;
+category: &quot;news&quot;
+description: &quot;（一覧に表示される1〜2文の説明）&quot;
+image: &quot;images/news/（画像ファイル名）&quot;
+---
+
+## （見出し）
+
+（本文をここに書きます。段落を分けるときは空の行を1行はさみます）
+
+- （箇条書きの項目）
+- （箇条書きの項目）
+</code></pre>
+<p><strong><code>（　）</code> が入っている行は、かっこごと消して書き換えてください。</strong> 書き換えずに残すと、そのまま画面に出ます。画像を使わない記事では <code>image:</code> の行ごと削除します。</p>
+<h2>付録B　Markdownチートシート（1枚版）</h2>
+<pre><code>## 見出し            ← 大見出し（## と半角スペース）
+### 小見出し          ← 小見出し
+- 箇条書き            ← 半角ハイフン＋半角スペース
+**太字**              ← 半角アスタリスク2つで挟む
+[表示する文字](?p=md/center/index.md)   ← サイト内リンク
+[表示する文字](https://example.com)     ← 外部リンク
+![画像の説明](images/news/photo.jpg)    ← 本文中の画像
+&lt;!-- 隠したい部分 --&gt;                   ← 挟んだ部分は表示されない（→ 3.8節②）
+
+段落を分ける＝空の行を1行はさむ
+記号はすべて半角。記号のあとに半角スペース
+</code></pre>
+<h2>付録C　更新チェックリスト（毎回の作業用）</h2>
+<ul>
+<li>[ ] ファイル名は半角英数字＋ハイフンで、<code>.md</code> で終わっている</li>
+<li>[ ] 情報カードは <code>---</code> で始まり <code>---</code> で閉じている</li>
+<li>[ ] <code>date</code> は <code>YYYY-MM-DD</code> 形式で書いた</li>
+<li>[ ] <code>date</code> に<strong>全角の数字</strong>（<code>２０２６</code>）が混じっていない</li>
+<li>[ ] 値は半角の <code>&quot;</code> で囲んだ</li>
+<li>[ ] お知らせ記事に <code>category: &quot;news&quot;</code> を書いた</li>
+<li>[ ] テンプレートの <strong><code>（　）</code> が残っていない</strong></li>
+<li>[ ] <strong>本文を書いた</strong>（情報カードだけで終わっていない）</li>
+<li>[ ] 画像を使う場合、<code>images/</code> にアップロードし、場所の書き間違いがない</li>
+<li>[ ] <strong>Preview タブ</strong>で見え方を確かめた</li>
+<li>[ ] <strong>Commit changes を押した</strong>（押すまで保存されません）</li>
+<li>[ ] 2分待って、サイトを再読み込みして表示を確認した</li>
+</ul>
+
+</body>
+</html>
