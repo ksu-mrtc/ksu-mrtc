@@ -44,7 +44,9 @@
     "url": "/research/",
     "path": "md/research/index.md",
     "title": "Research",
-    "collection": "research"
+    "collection": "research",
+    "navTitle": "研究成果",
+    "navOrder": "5"
   },
   {
     "url": "/center/member/井上貢一",
