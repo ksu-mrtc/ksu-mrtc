@@ -1,4 +1,4 @@
-[![伝み](images/favicon/favicon.jpg)](?p=md/index.md)
+[![伝み](assets/favicon/favicon.jpg)](?p=md/index.md)
 
 - [センターについて](?p=md/center/index.md)
 - [お知らせ](?p=md/news/index.md)

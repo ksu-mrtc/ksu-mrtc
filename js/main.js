@@ -351,7 +351,7 @@ ${item.image ? `<img src="${item.image}" alt="${item.title}" class="news-image">
             errorContainer.innerHTML = `
                 <div class="error-container">
                     <div class="error-image-wrapper">
-                        <img src="images/error/404.webp" alt="404 Not Found" class="error-image">
+                        <img src="assets/error/404.webp" alt="404 Not Found" class="error-image">
                     </div>
                     <div class="error-text-wrapper">
                         <h1 class="error-title">Oops!</h1>
