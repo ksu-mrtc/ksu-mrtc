@@ -33,12 +33,6 @@
     "navOrder": "4"
   },
   {
-    "url": "/local-industry/test-sub/",
-    "path": "md/local-industry/test-sub/index.md",
-    "title": "テスト用地域産業サブページ",
-    "navTitle": "ヘッダーに載らないはずのタイトル"
-  },
-  {
     "url": "/news/",
     "path": "md/news/index.md",
     "title": "News",
