@@ -1,4 +1,7 @@
-/* Error Page Styles */
+/* Error Page Styles
+ * 画像を用いず、文字だけで構成する。ヘッダーはそのまま表示されるため、
+ * この画面からもメニューで他のページへ移れる。
+ */
 .error-page {
     display: flex;
     flex-direction: column;
@@ -6,64 +9,50 @@
     justify-content: center;
     min-height: calc(100vh - 44px);
     padding: 20px;
-    background-color: #fff; /* White background as per image */
-    font-family: "SF Pro Display", "SF Pro Icons", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    background-color: #fff;
+    font-family: var(--font-sans);
     color: #1d1d1f;
 }
 
 .error-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 100px;
-    max-width: 1000px;
+    text-align: center;
+    max-width: 640px;
     width: 100%;
     animation: fadeIn 0.8s ease-out;
 }
 
-.error-image-wrapper {
-    flex: 1;
-    display: flex;
-    justify-content: flex-end;
-}
-
-.error-text-wrapper {
-    flex: 1;
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-.error-image {
-    width: 100%;
-    max-width: 600px;
-    height: auto;
-    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.1));
-    /* No border-radius on the image itself if it's an illustration object */
+.error-code {
+    font-size: 120px;
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    color: #d2d2d7; /* 主張しすぎない淡い灰色 */
+    margin: 0 0 16px;
 }
 
 .error-title {
-    font-size: 80px; /* Large "Oops!" */
-    font-weight: 700;
-    margin-bottom: 32px;
+    font-size: 56px;
+    font-weight: 600;
+    margin: 0 0 24px;
     letter-spacing: -0.02em;
     line-height: 1.1;
 }
 
 .error-message {
-    font-size: 24px;
-    line-height: 1.4;
-    color: #86868b; /* Gray text */
-    margin-bottom: 40px;
-    font-weight: 500;
+    font-size: 20px;
+    line-height: 1.6;
+    color: #86868b;
+    margin: 0 0 40px;
+    font-weight: 400;
 }
 
 .error-button {
     display: inline-flex;
     align-items: center;
-    background-color: #1d1d1f; /* Black button */
+    background-color: #1d1d1f;
     color: #fff;
     padding: 14px 32px;
     border-radius: 980px;
@@ -98,30 +87,15 @@
         padding-right: 40px;
     }
 
-    .error-container {
-        flex-direction: column;
-        gap: 30px;
-        text-align: center;
-    }
-
-    .error-image-wrapper {
-        justify-content: center;
-    }
-
-    .error-text-wrapper {
-        align-items: center;
-        text-align: center;
-    }
-
-    .error-image {
-        max-width: 400px;
+    .error-code {
+        font-size: 80px;
     }
 
     .error-title {
-        font-size: 48px;
+        font-size: 40px;
     }
 
     .error-message {
-        font-size: 19px;
+        font-size: 17px;
     }
 }

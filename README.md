@@ -22,7 +22,7 @@ HTML/CSS/JavaScriptのみで構成されており、ビルドプロセスを必�
 ├── css/                # コンポーネント別CSSファイル
 ├── js/                 # アプリケーションロジック (main.js) と同梱の markdown-it
 ├── images/             # 記事に添える画像（md/ と同名の下位フォルダ）と、特殊パーツ用の画像（slideshow/・nav/）
-├── assets/             # UIアセット（ファビコン・エラー画面の挿絵・同梱フォント）
+├── assets/             # UIアセット（ファビコン・同梱フォント）
 ├── scripts/            # content.json・slideshow.json・header.md の生成、マニュアルの印刷版の生成
 ├── content.json        # 全ページのメタデータの索引（生成物。リポジトリにも保持）
 ├── slideshow.json      # スライドショーの画像一覧（生成物。alt は手で書き足せる）
