@@ -224,6 +224,10 @@ a { color: inherit; text-decoration: underline; }
 <td><strong>5.1節</strong></td>
 </tr>
 <tr>
+<td>全データを手元に保管したい・サイトを復元したい ※管理者向け</td>
+<td><strong>5.4節</strong></td>
+</tr>
+<tr>
 <td>どうしても解決しないので人に聞きたい</td>
 <td><strong>4.4節</strong></td>
 </tr>
@@ -979,7 +983,7 @@ image: &quot;images/news/2026-07-15-summer.jpg&quot;
 <li><strong>表示される順番は、ファイル名の順</strong>です。順番を決めたいときは、<code>01-hakata.jpg</code>・<code>02-orimono.jpg</code> のように番号から始まる名前にします。</li>
 </ul>
 </li>
-<li><strong>Commit changes</strong> で保存します。数分後にトップページに現れます。</li>
+<li><strong>Commit changes</strong> で保存します。1〜2分後にトップページに現れます。</li>
 </ol>
 <p><strong>画像を減らすとき</strong>は、<code>images/slideshow/</code> の中の画像を開き、「…」メニューの <strong>Delete file</strong> → <strong>Commit changes</strong> です。</p>
 <h4>写真の説明を書き足す（任意）</h4>
@@ -1012,8 +1016,33 @@ image: &quot;images/news/2026-07-15-summer.jpg&quot;
 </ul>
 <h3>5.3 新しいコーナー（メニュー項目）を増やしたいとき ※管理者向け</h3>
 <p><code>md/</code> の直下に新しいフォルダを作り、その中に <code>index.md</code> を置いて、情報カードに <code>navTitle:</code>（メニューに表示する名前）と <code>navOrder:</code>（並び順の数字）を書くと、サイト上部のメニューに自動で追加されます。記事一覧を自動表示させたい場合は <code>collection:</code> に記事の <code>category</code> と同じ言葉を書きます。通常の記事更新では使わないため、詳細は管理者にご相談ください。</p>
-<h3>5.4 バックアップ（クローン）について ※管理者向け</h3>
-<p>このサイトの全データ（記事・画像・仕組みのすべて）は、リポジトリを「クローン（複製）」することで、手元のパソコンに丸ごとコピーできます。リポジトリのトップの緑の <strong>Code</strong> ボタン → <strong>Download ZIP</strong> でも一式を取得できます。定期的（例：月1回）に取得して保管しておくと、万一サービスに障害があってもサイト全体を復元できます。</p>
+<h3>5.4 バックアップ（クローン）と復元 ※管理者向け</h3>
+<p>このサイトの全データ（記事・画像・仕組みのすべて）は、リポジトリを「クローン（複製）」することで、<strong>変更の記録ごと</strong>手元のパソコンに丸ごとコピーできます。定期的（例：月1回）に取得して保管しておくと、万一サービスに障害があってもサイト全体を復元できます。</p>
+<h4>クローンする</h4>
+<p><strong>方法A：GitHub Desktop（無料のアプリ）を使う</strong></p>
+<ol>
+<li>リポジトリのトップで、緑の <strong>Code</strong> ボタン → <strong>Open with GitHub Desktop</strong> を押します。</li>
+<li>保存先のフォルダを選び、<strong>Clone</strong> を押します。</li>
+<li>2回目以降は、GitHub Desktop で <strong>Fetch origin</strong> → <strong>Pull origin</strong> を押すと、最新の状態になります。</li>
+</ol>
+<p><strong>方法B：Git のコマンドを使える場合</strong></p>
+<pre><code>git clone https://github.com/ksu-mrtc/ksu-mrtc.git
+</code></pre>
+<p>2回目以降は、できたフォルダの中で <code>git pull</code> を実行すると、最新の状態になります。</p>
+<blockquote>
+<p>緑の <strong>Code</strong> ボタン → <strong>Download ZIP</strong> でも、記事・画像・仕組みの一式は取得できます。ただし ZIP には<strong>変更の記録（いつ・誰が・何を変えたか）が含まれません。</strong> バックアップとしてはクローンを使ってください。</p>
+</blockquote>
+<h4>手元の複製からサイトを復元する</h4>
+<p>取得したフォルダを、そのまま静的なファイルを置けるホスティングサービス（GitHub Pages など）に置けば、サイトとして公開されます。</p>
+<ul>
+<li>そのまま置いた場合、一覧に出る記事は、<strong>最後に索引（<code>content.json</code>）を作り直して保存した時点まで</strong>です。それ以降に足した記事のページはありますが、一覧には出ません。</li>
+<li>最新の記事まで一覧に出すには、Node.js を使えるパソコンで、フォルダの中で次を実行してから置きます。</li>
+</ul>
+<pre><code>node scripts/generate-content.js &amp;&amp; node scripts/generate-slideshow.js
+</code></pre>
+<blockquote>
+<p>手元のパソコンで表示だけ確かめるときは、フォルダの中で <code>python3 -m http.server 8000</code> を実行し、ブラウザで <code>http://localhost:8000</code> を開きます。<code>index.html</code> をダブルクリックして開いても、記事は表示されません。</p>
+</blockquote>
 <hr>
 <h2>付録A　新規記事テンプレート（コピーして使う）</h2>
 <p>書き方の説明は 3.3節にあります。ここは、貼り付けて使うためのテンプレートです。</p>
