@@ -128,7 +128,7 @@ a { color: inherit; text-decoration: underline; }
 <li><code>content.json</code> … 同上</li>
 <li><code>index.html</code>・<code>js/</code>・<code>css/</code>・<code>scripts/</code>・<code>assets/</code>・<code>.github/</code> … サイトの仕組み本体です</li>
 </ul>
-<p><code>slideshow.json</code> は、5.2節の手順のときだけ編集します。
+<p><code>slideshow.json</code> は、スライドショーの写真に説明を書き足すとき（5.2節）だけ編集します。
 場所ごとの扱いの一覧は <strong>1.3節</strong>にあります。</p>
 <hr>
 <h2>やりたいことから引く</h2>
@@ -303,7 +303,7 @@ a { color: inherit; text-decoration: underline; }
 </tr>
 <tr>
 <td><code>slideshow.json</code></td>
-<td>△ トップページのスライドショーの設定。<strong>5.2節の手順のときだけ</strong>編集します</td>
+<td>△ スライドショーの写真の一覧。保存のたびに自動で作り直されます。<strong>写真の説明（<code>alt</code>）を書き足すときだけ</strong>編集します（→ 5.2節）</td>
 </tr>
 <tr>
 <td><code>index.html</code>・<code>js/</code>・<code>css/</code>・<code>scripts/</code>・<code>.github/</code></td>
@@ -954,41 +954,31 @@ image: &quot;images/news/2026-07-15-summer.jpg&quot;
 </ul>
 <p>すべての変更が自動で記録されているため、「誰かが触って壊れたまま分からなくなる」ことがありません。これがこの仕組みの安心材料のひとつです。</p>
 <h3>5.2 トップページのスライドショー画像を入れ替える</h3>
-<p>トップページで切り替わる大きな写真は、<strong><code>images/slideshow/</code> フォルダの中身ではなく、リポジトリのトップにある <code>slideshow.json</code> というファイルが決めています。</strong> 画像を上げただけでは表示されません。<strong>画像のアップロードと、<code>slideshow.json</code> の書き換えの両方</strong>が必要です。</p>
+<p>トップページで切り替わる大きな写真は、<strong><code>images/slideshow/</code> フォルダに入っている画像がそのまま使われます。</strong> 保存のたびに一覧（<code>slideshow.json</code>）が自動で作り直されるため、画像を入れるか消すだけで反映されます。</p>
 <ol>
-<li>
-<p>3.5節①の手順で、<code>images</code> → <code>slideshow</code> フォルダに画像をアップロードします。</p>
+<li>3.5節①の手順で、<code>images</code> → <code>slideshow</code> フォルダに画像をアップロードします。
 <ul>
 <li>スライドショーは画面いっぱいに表示されるため、<strong>長辺2000px程度・1MB以内</strong>を目安にしてください。</li>
+<li><strong>表示される順番は、ファイル名の順</strong>です。順番を決めたいときは、<code>01-hakata.jpg</code>・<code>02-orimono.jpg</code> のように番号から始まる名前にします。</li>
 </ul>
 </li>
-<li>
-<p>リポジトリのトップに戻り、<strong><code>slideshow.json</code></strong> を開いて編集します。中身は次の形です。</p>
+<li><strong>Commit changes</strong> で保存します。数分後にトップページに現れます。</li>
+</ol>
+<p><strong>画像を減らすとき</strong>は、<code>images/slideshow/</code> の中の画像を開き、「…」メニューの <strong>Delete file</strong> → <strong>Commit changes</strong> です。</p>
+<h4>写真の説明を書き足す（任意）</h4>
+<p>写真に何が写っているかの説明（→ 3.5節「写真の説明」）は、リポジトリのトップにある <strong><code>slideshow.json</code></strong> に書きます。画像を上げて保存したあと、数分待ってから開くと、新しい画像の行が加わっています。</p>
 <pre><code>[
   {
     &quot;src&quot;: &quot;images/slideshow/hakata-ningyo-01.jpg&quot;,
     &quot;alt&quot;: &quot;黒い台座に並べられた博多人形。手前は十二単をまとった女性の人形&quot;
-  },
-  {
-    &quot;src&quot;: &quot;images/slideshow/tateito-03.jpg&quot;,
-    &quot;alt&quot;: &quot;手織機に張られた橙色の経糸と、織り上がりつつある緑と白の縞の織物&quot;
   }
 ]
 </code></pre>
 <ul>
-<li><code>src</code> … 画像の場所。<code>images/slideshow/</code> から先頭から書きます。</li>
-<li><code>alt</code> … <strong>その写真に何が写っているかの説明</strong>（→ 3.5節「写真の説明」）。</li>
-<li><strong>表示される順番は、ファイル名の順ではなく、この中に書いた順</strong>です。</li>
-<li>1枚分は <code>{ }</code> で挟んだ2行で、枚数分を <code>,</code>（半角カンマ）で区切って並べます。<strong>最後の1枚のうしろにはカンマを付けません。</strong></li>
+<li>書き換えてよいのは <strong><code>alt</code> の <code>&quot; &quot;</code> の中だけ</strong>です。最初はファイル名が入っているので、写真の説明に置き換えます。</li>
+<li><code>src</code>（画像の場所）や並び順は書き換えないでください。保存のたびに、フォルダの中身から作り直されます。</li>
+<li>書き足した説明は、次に作り直されるときも引き継がれます。</li>
 </ul>
-</li>
-<li>
-<p><strong>Commit changes</strong> で保存します。</p>
-</li>
-</ol>
-<blockquote>
-<p><strong>画像を減らすときは、<code>slideshow.json</code> の側を先に直してください。</strong> 画像ファイルだけ <strong>Delete file</strong> で消すと、<code>slideshow.json</code> には場所が残ったままになり、トップページに<strong>壊れた写真の枠</strong>が出ます。</p>
-</blockquote>
 <h3>5.3 新しいコーナー（メニュー項目）を増やしたいとき ※管理者向け</h3>
 <p><code>md/</code> の直下に新しいフォルダを作り、その中に <code>index.md</code> を置いて、情報カードに <code>navTitle:</code>（メニューに表示する名前）と <code>navOrder:</code>（並び順の数字）を書くと、サイト上部のメニューに自動で追加されます。記事一覧を自動表示させたい場合は <code>collection:</code> に記事の <code>category</code> と同じ言葉を書きます。通常の記事更新では使わないため、詳細は管理者にご相談ください。</p>
 <h3>5.4 バックアップ（クローン）について ※管理者向け</h3>
