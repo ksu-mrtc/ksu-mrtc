@@ -570,6 +570,53 @@ a { color: inherit; text-decoration: underline; }
 <blockquote>
 <p>一覧ページ（各フォルダの <code>index.md</code>）に書かれた <code>collection:</code> と、記事の <code>category:</code> が<strong>同じ言葉</strong>のときに、その記事が一覧に並びます。<code>category</code> の行を消すと一覧から外れるのは、このためです（→ 3.8節①）。</p>
 </blockquote>
+<h4>記事の種類ごとに書く項目</h4>
+<p>テンプレートはお知らせ用です。研究成果・製作メンバーの記事では、次の表のとおりに書き換えます。</p>
+<table>
+<thead>
+<tr>
+<th>情報カードの項目</th>
+<th>お知らせ</th>
+<th>研究成果</th>
+<th>製作メンバー</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>title</code></td>
+<td>○</td>
+<td>○</td>
+<td>○（氏名）</td>
+</tr>
+<tr>
+<td><code>date</code></td>
+<td>○ <strong>必ず</strong></td>
+<td>○ <strong>必ず</strong></td>
+<td>書かない（行ごと消す）</td>
+</tr>
+<tr>
+<td><code>category</code></td>
+<td><code>news</code></td>
+<td><code>research</code></td>
+<td><code>member</code></td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>○</td>
+<td>○</td>
+<td>○（所属）</td>
+</tr>
+<tr>
+<td><code>image</code></td>
+<td>任意（<code>images/news/</code> に置いた写真）</td>
+<td>書かない</td>
+<td>書かない</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>研究成果・製作メンバーの記事に写真を載せたいときは、管理者に相談してください。写真を置くフォルダ（<code>images/research/</code> など）がまだないためです。</p>
+</blockquote>
 <blockquote>
 <p><code>kakiemon</code>・<code>local-industry</code> と、<code>center</code> の直下は、記事を並べる一覧を持たない<strong>1枚もののページ</strong>です。ここを直すときは新しく記事を作らず、3.2節の手順でそのフォルダの <code>index.md</code> を編集します。</p>
 </blockquote>
@@ -578,7 +625,7 @@ a { color: inherit; text-decoration: underline; }
 </blockquote>
 <h4>手順</h4>
 <ol>
-<li><code>md</code> → <code>news</code> フォルダ（記事を置きたいフォルダ）を開きます。</li>
+<li><code>md</code> → <code>news</code> フォルダ（記事を置きたいフォルダ。上の表を参照）を開きます。</li>
 <li>右上の <strong>Add file</strong> → <strong>Create new file</strong> をクリックします。</li>
 <li>一番上の欄に<strong>ファイル名</strong>を入力します（ルールは下記）。</li>
 <li>本文欄に、下のテンプレートを貼り付け、<strong><code>（　）</code> の部分をすべて書き換えます</strong>（かっこごと消します）。</li>
@@ -593,26 +640,35 @@ description: &quot;（一覧に表示される1〜2文の説明）&quot;
 image: &quot;images/news/（画像ファイル名）&quot;
 ---
 
-## （見出し）
+# （記事のタイトル。title と同じ文でよい）
 
 （本文をここに書きます。段落を分けるときは空の行を1行はさみます）
+
+## （見出し。要らなければ行ごと消す）
 
 - （箇条書きの項目）
 - （箇条書きの項目）
 </code></pre>
 <p><strong><code>（　）</code> が入っている行は、かっこごと消して書き換えてください。</strong> 画像を使わない記事では <code>image:</code> の行ごと削除します。</p>
 <blockquote>
+<p><strong>本文の最初の <code># </code> の行が、記事ページの一番上に出る題名になります。</strong> 情報カードの <code>title</code> は一覧に出る名前で、記事ページには表示されません。<code># </code> の行を消すと、題名のないページになります。</p>
+</blockquote>
+<blockquote>
 <p>ここに載せたものと同じテンプレートが <strong>付録A</strong> にもあります。印刷して使うときは、そちらを切り離して手元に置くと、行き来せずに済みます。</p>
 </blockquote>
-<h4>ファイル名のルール</h4>
+<h4>ファイル名のルール（新しく作るファイル）</h4>
 <ul>
 <li><strong>半角の英数字とハイフン（-）だけ</strong>を使う。日本語・スペース・全角文字は使わない</li>
-<li><strong><code>日付-内容.md</code> の形にする</strong>　例：<code>2026-07-15-summer-event.md</code></li>
+<li>お知らせ・研究成果は <strong><code>日付-内容.md</code> の形にする</strong>　例：<code>2026-07-15-summer-event.md</code></li>
+<li>製作メンバーは <strong>氏名のローマ字にする</strong>　例：<code>sato-ao.md</code></li>
 <li>最後は必ず <code>.md</code> で終わる</li>
 <li><code>index.md</code> という名前は一覧ページ専用なので、<strong>記事には使わない</strong></li>
 </ul>
 <blockquote>
 <p>記事の並び順は情報カードの <code>date</code> で決まるため、ファイル名そのものは表示に影響しません。それでも<strong>日付から始めてください。</strong> あとからファイルを探すとき、名前だけで見分けられるようにするためです。</p>
+</blockquote>
+<blockquote>
+<p><strong>すでにあるファイルには、このルールより前に作られたもの</strong>（<code>2026-02-18.md</code> のような日付だけの名前、<code>佐藤蒼.md</code> のような日本語の名前、<code>2025.7.28_1.jpg</code> のような画像名）があります。<strong>これらの名前は変えないでください。</strong> ファイル名はそのままページの住所（URL）になっているため、変えるとそのページへのリンクが切れます。ルールは、これから新しく作るファイルにだけ当てはめます。</p>
 </blockquote>
 <h4>記事の情報カード（Frontmatter）の書き方</h4>
 <p>記事ファイルの先頭には、<code>---</code> で挟んだ「情報カード」を書きます。</p>
@@ -625,7 +681,7 @@ image: &quot;images/news/2026-07-15-summer.jpg&quot;
 ---
 </code></pre>
 <blockquote>
-<p>値は <code>&quot;</code>（半角の二重引用符）で囲むのがこのサイトの決まりです。既存の記事ファイルを開くと同じ書き方になっているので、迷ったらそちらを見本にしてください。</p>
+<p>値は <code>&quot;</code>（半角の二重引用符）で囲むのがこのサイトの決まりです。<strong>迷ったときの見本は、既存の記事ではなく、このテンプレート（付録A）です。</strong> 既存の記事には、ルールより前に作られて書き方の違うものが混じっています。</p>
 </blockquote>
 <table>
 <thead>
@@ -644,12 +700,12 @@ image: &quot;images/news/2026-07-15-summer.jpg&quot;
 <tr>
 <td><code>date</code></td>
 <td>日付</td>
-<td><strong>必ず <code>2026-07-15</code> の形式（年4桁-月2桁-日2桁）</strong>。この日付で一覧の並び順が決まります</td>
+<td>お知らせ・研究成果では<strong>必ず</strong>書く。<strong><code>2026-07-15</code> の形式（年4桁-月2桁-日2桁）</strong>。この日付で一覧の並び順が決まります。製作メンバーには書きません</td>
 </tr>
 <tr>
 <td><code>category</code></td>
 <td>記事の種類</td>
-<td>お知らせ記事は <code>news</code> と書きます（一覧に載せるための目印です）</td>
+<td>お知らせは <code>news</code>、研究成果は <code>research</code>、製作メンバーは <code>member</code>（一覧に載せるための目印です）</td>
 </tr>
 <tr>
 <td><code>description</code></td>
@@ -683,6 +739,11 @@ image: &quot;images/news/2026-07-15-summer.jpg&quot;
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>記事の題名</td>
+<td><code># 夏の企画展のお知らせ</code></td>
+<td>ページの一番上の題名（本文の最初に1回だけ）</td>
+</tr>
 <tr>
 <td>見出し</td>
 <td><code>## 開催概要</code></td>
@@ -1054,16 +1115,19 @@ description: &quot;（一覧に表示される1〜2文の説明）&quot;
 image: &quot;images/news/（画像ファイル名）&quot;
 ---
 
-## （見出し）
+# （記事のタイトル。title と同じ文でよい）
 
 （本文をここに書きます。段落を分けるときは空の行を1行はさみます）
+
+## （見出し。要らなければ行ごと消す）
 
 - （箇条書きの項目）
 - （箇条書きの項目）
 </code></pre>
 <p><strong><code>（　）</code> が入っている行は、かっこごと消して書き換えてください。</strong> 書き換えずに残すと、そのまま画面に出ます。画像を使わない記事では <code>image:</code> の行ごと削除します。</p>
 <h2>付録B　Markdownチートシート（1枚版）</h2>
-<pre><code>## 見出し            ← 大見出し（## と半角スペース）
+<pre><code># 記事の題名         ← ページの一番上の題名（本文の最初に1回だけ）
+## 見出し            ← 大見出し（## と半角スペース）
 ### 小見出し          ← 小見出し
 - 箇条書き            ← 半角ハイフン＋半角スペース
 **太字**              ← 半角アスタリスク2つで挟む
@@ -1084,7 +1148,7 @@ image: &quot;images/news/（画像ファイル名）&quot;
 <li>[ ] 値は半角の <code>&quot;</code> で囲んだ</li>
 <li>[ ] お知らせ記事に <code>category: &quot;news&quot;</code> を書いた</li>
 <li>[ ] テンプレートの <strong><code>（　）</code> が残っていない</strong></li>
-<li>[ ] <strong>本文を書いた</strong>（情報カードだけで終わっていない）</li>
+<li>[ ] <strong>本文を書いた</strong>（情報カードだけで終わっていない）。本文の最初に <code># 題名</code> の行がある</li>
 <li>[ ] 画像を使う場合、<code>images/</code> にアップロードし、場所の書き間違いがない</li>
 <li>[ ] <strong>Preview タブ</strong>で見え方を確かめた（画像とリンクは Preview では出ないので、公開後にサイトで確かめる）</li>
 <li>[ ] <strong>Commit changes を押した</strong>（押すまで保存されません）</li>
