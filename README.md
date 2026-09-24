@@ -8,7 +8,7 @@ HTML/CSS/JavaScriptのみで構成されており、ビルドプロセスを必�
 - **Markdown駆動**: コンテンツは全て `md/` ディレクトリ内のMarkdownファイルとして管理されます。
 - **動的ルーティング**: URLパラメータ (`?p=...`) またはパスに基づいて、対応するMarkdownファイルを非同期で読み込み、ブラウザ上でHTMLに変換して表示します。
 - **SPAライクな挙動**: ページ遷移時にフルリロードを行わず、JavaScriptでコンテンツを書き換えます（`History API`を使用）。
-- **メタデータ管理**: `content.json` でサイト内のページ構成やメタデータ（タイトル、日付、カテゴリ、レイアウト等）を一元管理しています。
+- **メタデータ管理**: `content.json` でサイト内のページ構成やメタデータ（タイトル、日付、カテゴリ等）を一元管理しています。表示レイアウトはデータに持たせず、ファイルの配置場所・ファイル名・`collection` 属性の有無から閲覧時に推論します（`js/main.js` の `inferLayout`）。
 
 ## ディレクトリ構成
 
@@ -20,9 +20,13 @@ HTML/CSS/JavaScriptのみで構成されており、ビルドプロセスを必�
 │   ├── research/       # 研究プロジェクト記事
 │   └── parts/          # ヘッダー・フッター等の共通パーツ
 ├── css/                # コンポーネント別CSSファイル
-├── js/                 # アプリケーションロジック (main.js)
-├── images/             # 画像ファイル
-├── content.json        # サイト構成定義ファイル
+├── js/                 # アプリケーションロジック (main.js) と同梱の markdown-it
+├── images/             # 記事に添える画像（md/ と同名の下位フォルダ）と、特殊パーツ用の画像（slideshow/・nav/）
+├── assets/             # UIアセット（ファビコン・エラー画面の挿絵・同梱フォント）
+├── scripts/            # content.json・slideshow.json・header.md の生成、マニュアルの印刷版の生成
+├── content.json        # 全ページのメタデータの索引（生成物。リポジトリにも保持）
+├── slideshow.json      # スライドショーの画像一覧（生成物。alt は手で書き足せる）
+├── manual.md           # 更新者向けの操作マニュアル（manual.html はその印刷版）
 └── index.html          # エントリーポイント
 ```
 
@@ -41,14 +45,14 @@ HTML/CSS/JavaScriptのみで構成されており、ビルドプロセスを必�
    title: "記事のタイトル"
    date: "2025-01-01"
    category: "news"    # news, research, etc.
-   layout: "article"   # article (詳細), list (一覧), top (トップ)
    description: "記事の短い説明"
-   image: "/images/news/thumbnail.jpg" # (任意) サムネイル画像
+   image: "images/news/thumbnail.jpg" # (任意) サムネイル画像。先頭に / を付けない
    ---
    ```
 
 3. **content.json の自動生成**:
    `content.json` は GitHub Actions によって自動生成されます。`main` ブランチに push すると、`scripts/generate-content.js` が実行され、Markdownファイルのフロントマターから自動的に `content.json` が生成・デプロイされます。手動での編集は不要です。
+   生成結果はリポジトリには書き戻されません。リポジトリ上の `content.json` は、最後に手元で生成してコミットした時点のものです（GitHub Actions が使えないときの縮退用の出発点）。
 
    ローカルで確認したい場合は以下を実行してください：
    ```bash
@@ -81,7 +85,7 @@ npx http-server .
 - **HTML5 / CSS3**: Vanilla CSS (CSS Variables使用)
 - **JavaScript**: Vanilla JS (ES Modules不使用、単一ファイル)
 - **markdown-it**: ブラウザ側でのMarkdownレンダリングエンジン
-- **Google Fonts**: Noto Serif JP, Outfit
+- **Outfit**: 欧文フォント（`assets/fonts/` に同梱。SIL Open Font License 1.1）
 
 ## markdown-it マークダウン記法リファレンス
 
