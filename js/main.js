@@ -356,7 +356,7 @@ ${item.image ? `<img src="${item.image}" alt="${item.title}" class="news-image">
                     <div class="error-text-wrapper">
                         <h1 class="error-title">Oops!</h1>
                         <p class="error-message">ページが見つかりませんでした。</br>URLをご確認いただくか、トップページへお戻りください。</p>
-                        <a href="/" class="error-button">
+                        <a href="?p=md/index.md" class="error-button">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px;"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
                             Go home
                         </a>
