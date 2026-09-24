@@ -27,6 +27,19 @@ function main() {
     process.exit(1);
   }
 
+  // 既存の slideshow.json に書かれた説明文（alt）は、同じ画像であれば引き継ぐ。
+  // 画像の追加・削除はディレクトリの中身で決まり、説明文だけを人が書き足せる。
+  const existingAlt = {};
+  if (fs.existsSync(OUTPUT_FILE)) {
+    try {
+      for (const entry of JSON.parse(fs.readFileSync(OUTPUT_FILE, 'utf-8'))) {
+        if (entry && entry.src && entry.alt) existingAlt[entry.src] = entry.alt;
+      }
+    } catch (e) {
+      console.warn(`Warning: ${OUTPUT_FILE} を読めなかったため、説明文は引き継ぎません。`);
+    }
+  }
+
   const items = fs.readdirSync(SLIDESHOW_DIR);
   const slideshowList = [];
 
@@ -37,8 +50,9 @@ function main() {
     if (stat.isFile()) {
       const ext = path.extname(item).toLowerCase();
       if (IMAGE_EXTENSIONS.includes(ext)) {
-        const alt = path.basename(item, ext); // 拡張子なしのファイル名をデフォルトのaltとする
         const src = `images/slideshow/${item}`;
+        // 説明文が書かれていなければ、拡張子なしのファイル名を代わりに用いる
+        const alt = existingAlt[src] || path.basename(item, ext);
         
         slideshowList.push({
           src: src,
