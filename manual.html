@@ -121,10 +121,16 @@ a { color: inherit; text-decoration: underline; }
 <blockquote>
 <p>印刷したり他のソフトへ貼り付けたりすると、枠や太字が消えることがあります。そのときは〔　〕だけが残るので、<strong>キーボードのキーかどうか</strong>はそれで見分けられます。</p>
 </blockquote>
+<h3>印刷して使うとき</h3>
+<p>印刷用に整えた形を、次のアドレスで開けます。ブラウザで開いてから印刷（Windows：〔Ctrl〕＋〔P〕／Mac：〔⌘〕＋〔P〕）してください。章ごとに改ページされます。</p>
+<p>https://ksu-mrtc.github.io/ksu-mrtc/manual.html</p>
+<blockquote>
+<p>GitHub の画面の中で <code>manual.html</code> を開くと、ページではなく中身の文字（HTML）が表示されます。印刷には使えないので、上のアドレスから開いてください。</p>
+</blockquote>
 <h3>編集してはいけない場所</h3>
 <p>次の3つだけは触らないでください。<strong>これ以外は、間違えても元に戻せます</strong>（→ 4.3節）。</p>
 <ul>
-<li><code>md/parts/header.md</code> … 自動で作り直されるため、直しても消えます</li>
+<li><code>md/parts/header.md</code> … サイトに出るものは保存のたびに自動で作り直されるため、直してもサイトには反映されません</li>
 <li><code>content.json</code> … 同上</li>
 <li><code>index.html</code>・<code>js/</code>・<code>css/</code>・<code>scripts/</code>・<code>assets/</code>・<code>.github/</code> … サイトの仕組み本体です</li>
 </ul>
@@ -225,6 +231,10 @@ a { color: inherit; text-decoration: underline; }
 <td>書いてある英字がファイル名かボタンか分からない</td>
 <td><strong>この冊子の読み方</strong></td>
 </tr>
+<tr>
+<td>このマニュアルを紙に印刷したい</td>
+<td><strong>この冊子の読み方</strong>（印刷して使うとき）</td>
+</tr>
 </tbody>
 </table>
 <hr>
@@ -279,7 +289,7 @@ a { color: inherit; text-decoration: underline; }
 <tbody>
 <tr>
 <td><code>md/</code> フォルダの中の記事ファイル</td>
-<td>○ <strong>編集するのはここだけ</strong>です</td>
+<td>○ <strong>文章を編集するのはここ</strong>です（<code>md/parts/header.md</code> だけは下のとおり×）</td>
 </tr>
 <tr>
 <td><code>images/</code> フォルダ</td>
@@ -295,15 +305,15 @@ a { color: inherit; text-decoration: underline; }
 </tr>
 <tr>
 <td><code>md/parts/header.md</code></td>
-<td>× <strong>編集しない</strong>。自動で作り直されるため、直しても消えます</td>
+<td>× <strong>編集しない</strong>。サイトに出るものは自動で作り直されるため、直してもサイトには反映されません</td>
 </tr>
 <tr>
 <td><code>content.json</code></td>
-<td>× <strong>編集しない</strong>。保存のたびに自動で作り直されるため、直しても消えます</td>
+<td>× <strong>編集しない</strong>。サイトに出るものは保存のたびに自動で作り直されるため、直してもサイトには反映されません</td>
 </tr>
 <tr>
 <td><code>slideshow.json</code></td>
-<td>△ スライドショーの写真の一覧。保存のたびに自動で作り直されます。<strong>写真の説明（<code>alt</code>）を書き足すときだけ</strong>編集します（→ 5.2節）</td>
+<td>△ スライドショーの写真の説明を書いておく場所。<strong>写真の説明（<code>alt</code>）を書き足すときだけ</strong>編集します（→ 5.2節）</td>
 </tr>
 <tr>
 <td><code>index.html</code>・<code>js/</code>・<code>css/</code>・<code>scripts/</code>・<code>.github/</code></td>
@@ -559,6 +569,9 @@ a { color: inherit; text-decoration: underline; }
 <blockquote>
 <p><code>kakiemon</code>・<code>local-industry</code> と、<code>center</code> の直下は、記事を並べる一覧を持たない<strong>1枚もののページ</strong>です。ここを直すときは新しく記事を作らず、3.2節の手順でそのフォルダの <code>index.md</code> を編集します。</p>
 </blockquote>
+<blockquote>
+<p><strong><code>index.md</code> の情報カードにある <code>navTitle:</code>・<code>navOrder:</code>・<code>collection:</code> の行は変えないでください。</strong> サイト上部のメニューの名前と並び順、記事の一覧がこの行で決まっています（→ 5.3節）。直してよいのは <code>title:</code> と、<code>---</code> より下の本文です。</p>
+</blockquote>
 <h4>手順</h4>
 <ol>
 <li><code>md</code> → <code>news</code> フォルダ（記事を置きたいフォルダ）を開きます。</li>
@@ -805,12 +818,15 @@ image: &quot;images/news/2026-07-15-summer.jpg&quot;
 <p>編集画面の上のほうに <strong>Preview</strong> というタブがあります（隣は <strong>Edit</strong>）。</p>
 <ol>
 <li>本文を書き終えたら <strong>Preview</strong> タブをクリックします。</li>
-<li>見出し・箇条書き・リンク・画像が、思ったとおりに出ているか確かめます。</li>
+<li>見出し・箇条書き・太字などが、思ったとおりに出ているか確かめます。</li>
 <li>直したいところがあれば <strong>Edit</strong> タブに戻って書き直します。</li>
 </ol>
 <blockquote>
 <p><strong>この仕組みは、書き間違いを自動では教えてくれません。</strong> 公開してしまう前に自分の目で確かめられるのは、ここです。
 なお、情報カード（<code>---</code> で挟んだ部分）はプレビューでは表のように表示されます。本文の見え方を確かめるための機能だと考えてください。</p>
+</blockquote>
+<blockquote>
+<p><strong>画像とサイト内のリンク（<code>?p=</code>）は、Preview では正しく表示されません。</strong> GitHub は記事ファイルの置き場所を基準に画像を探すため、<code>images/…</code> と正しく書いていても、画像は壊れた印で表示されます。書き間違いではないので、そのまま保存して、公開後にサイトで確かめてください（→ 3.7節）。</p>
 </blockquote>
 <h4>Commit で保存する</h4>
 <p>どの操作でも、最後は必ず <strong>Commit changes</strong> です。これが「保存ボタン」であり「公開ボタン」です。</p>
@@ -911,7 +927,7 @@ image: &quot;images/news/2026-07-15-summer.jpg&quot;
 <ol>
 <li><strong>2分待ちましたか？</strong> 反映には時間がかかります。</li>
 <li><strong>再読み込みしましたか？</strong> ブラウザが古い表示を覚えていることがあります。Windows は 〔Ctrl〕＋〔R〕（それでもだめなら 〔Ctrl〕＋〔Shift〕＋〔R〕）、Mac は 〔⌘〕＋〔R〕（それでもだめなら 〔⌘〕＋〔Shift〕＋〔R〕）。</li>
-<li><strong>Actions タブは緑✓ですか？</strong> 赤×のときは処理が失敗しています。多くの場合、直前に保存したファイルの情報カード（Frontmatter）の書き間違いが原因です。4.2 のチェック項目を確認して修正・再コミットしてください。それでも赤×が続く場合は 4.4節へ。</li>
+<li><strong>Actions タブは緑✓ですか？</strong> 赤×のときは処理が失敗しています。情報カード（Frontmatter）の書き間違いでは赤×にはならず、表示がおかしくなるだけです（→ 4.2節）。赤×の多くは GitHub 側の一時的な不調によるものなので、しばらく待ってから、赤×の行を開いて右上の <strong>Re-run jobs</strong> を押すと、同じ処理をやり直せます。それでも赤×が続く場合は 4.4節へ。</li>
 </ol>
 <h3>4.2 記事が一覧に出ない・表示がおかしい</h3>
 <p>原因のほとんどは情報カードの書き間違いです。該当ファイルを開き、次を確認してください。</p>
@@ -929,7 +945,8 @@ image: &quot;images/news/2026-07-15-summer.jpg&quot;
 <ol>
 <li>該当ファイルを開き、右上の <strong>History</strong> をクリックします。</li>
 <li>変更の一覧が新しい順に並びます。<strong>戻したい時点（間違える前）の記録</strong>をクリックします。</li>
-<li>その時点のファイルの中身が表示されるので、本文を<strong>全部選択してコピー</strong>します。</li>
+<li>その記録で**変えた箇所（赤と緑の行）**の画面が開きます。ファイル名の右にある <strong>…</strong> をクリックし、<strong>View file</strong> を選ぶと、その時点のファイルの中身が表示されます。</li>
+<li>本文を<strong>全部選択してコピー</strong>します。</li>
 <li>通常の手順（3.2節）でファイルを開いて編集し、中身をコピーした内容に<strong>貼り替えて</strong>コミットします。</li>
 </ol>
 <blockquote>
@@ -954,7 +971,7 @@ image: &quot;images/news/2026-07-15-summer.jpg&quot;
 </ul>
 <p>すべての変更が自動で記録されているため、「誰かが触って壊れたまま分からなくなる」ことがありません。これがこの仕組みの安心材料のひとつです。</p>
 <h3>5.2 トップページのスライドショー画像を入れ替える</h3>
-<p>トップページで切り替わる大きな写真は、<strong><code>images/slideshow/</code> フォルダに入っている画像がそのまま使われます。</strong> 保存のたびに一覧（<code>slideshow.json</code>）が自動で作り直されるため、画像を入れるか消すだけで反映されます。</p>
+<p>トップページで切り替わる大きな写真は、<strong><code>images/slideshow/</code> フォルダに入っている画像がそのまま使われます。</strong> サイトに出る写真の一覧は保存のたびにこのフォルダの中身から自動で作り直されるため、画像を入れるか消すだけで反映されます。</p>
 <ol>
 <li>3.5節①の手順で、<code>images</code> → <code>slideshow</code> フォルダに画像をアップロードします。
 <ul>
@@ -966,18 +983,32 @@ image: &quot;images/news/2026-07-15-summer.jpg&quot;
 </ol>
 <p><strong>画像を減らすとき</strong>は、<code>images/slideshow/</code> の中の画像を開き、「…」メニューの <strong>Delete file</strong> → <strong>Commit changes</strong> です。</p>
 <h4>写真の説明を書き足す（任意）</h4>
-<p>写真に何が写っているかの説明（→ 3.5節「写真の説明」）は、リポジトリのトップにある <strong><code>slideshow.json</code></strong> に書きます。画像を上げて保存したあと、数分待ってから開くと、新しい画像の行が加わっています。</p>
+<p>写真に何が写っているかの説明（→ 3.5節「写真の説明」）は、リポジトリのトップにある <strong><code>slideshow.json</code></strong> に、<strong>画像の場所（<code>src</code>）と説明（<code>alt</code>）の組を自分で書き足します。</strong> このファイルは自動では書き換わらないため、新しく上げた画像の行はここには現れません。</p>
+<ol>
+<li>リポジトリのトップで <strong><code>slideshow.json</code></strong> を開き、編集します。</li>
+<li>次の形で、新しい画像の組を書き足します（例は2枚分）。</li>
+</ol>
 <pre><code>[
   {
     &quot;src&quot;: &quot;images/slideshow/hakata-ningyo-01.jpg&quot;,
     &quot;alt&quot;: &quot;黒い台座に並べられた博多人形。手前は十二単をまとった女性の人形&quot;
+  },
+  {
+    &quot;src&quot;: &quot;images/slideshow/01-orimono.jpg&quot;,
+    &quot;alt&quot;: &quot;ここに、写真に写っているものの説明を書く&quot;
   }
 ]
 </code></pre>
+<ol start="3">
+<li><strong>Commit changes</strong> で保存します。</li>
+</ol>
 <ul>
-<li>書き換えてよいのは <strong><code>alt</code> の <code>&quot; &quot;</code> の中だけ</strong>です。最初はファイル名が入っているので、写真の説明に置き換えます。</li>
-<li><code>src</code>（画像の場所）や並び順は書き換えないでください。保存のたびに、フォルダの中身から作り直されます。</li>
-<li>書き足した説明は、次に作り直されるときも引き継がれます。</li>
+<li><code>src</code> は、<code>images/slideshow/</code> に続けて、上げた画像の<strong>ファイル名を正確に</strong>書きます。</li>
+<li>1枚分は <code>{ }</code> で挟んだ2行です。組と組のあいだは <code>,</code>（半角カンマ）で区切り、<strong>最後の組のうしろにはカンマを付けません。</strong></li>
+<li>表示される順番は、ここに書いた順ではなく<strong>ファイル名の順</strong>です。</li>
+<li>説明を書き足さなかった画像は、ファイル名が説明の代わりに使われます。</li>
+<li>カンマや <code>&quot;</code> の書き間違いでファイルが読めない形になっても、写真の表示は壊れません。ただし、<strong>すべての写真の説明がファイル名に戻ります。</strong> 保存後にトップページの写真が出ているか、説明が残っているかを確かめてください。</li>
+<li>画像を消したときは、その組も消しておくと分かりやすくなります（残っていても表示は壊れません）。</li>
 </ul>
 <h3>5.3 新しいコーナー（メニュー項目）を増やしたいとき ※管理者向け</h3>
 <p><code>md/</code> の直下に新しいフォルダを作り、その中に <code>index.md</code> を置いて、情報カードに <code>navTitle:</code>（メニューに表示する名前）と <code>navOrder:</code>（並び順の数字）を書くと、サイト上部のメニューに自動で追加されます。記事一覧を自動表示させたい場合は <code>collection:</code> に記事の <code>category</code> と同じ言葉を書きます。通常の記事更新では使わないため、詳細は管理者にご相談ください。</p>
@@ -1026,7 +1057,7 @@ image: &quot;images/news/（画像ファイル名）&quot;
 <li>[ ] テンプレートの <strong><code>（　）</code> が残っていない</strong></li>
 <li>[ ] <strong>本文を書いた</strong>（情報カードだけで終わっていない）</li>
 <li>[ ] 画像を使う場合、<code>images/</code> にアップロードし、場所の書き間違いがない</li>
-<li>[ ] <strong>Preview タブ</strong>で見え方を確かめた</li>
+<li>[ ] <strong>Preview タブ</strong>で見え方を確かめた（画像とリンクは Preview では出ないので、公開後にサイトで確かめる）</li>
 <li>[ ] <strong>Commit changes を押した</strong>（押すまで保存されません）</li>
 <li>[ ] 2分待って、サイトを再読み込みして表示を確認した</li>
 </ul>
