@@ -351,7 +351,6 @@ ${item.image ? `<img src="${item.image}" alt="${item.title}" class="news-image">
             errorContainer.innerHTML = `
                 <div class="error-container">
                     <p class="error-code">404</p>
-                    <h1 class="error-title">Oops!</h1>
                     <p class="error-message">ページが見つかりませんでした。<br>URLをご確認いただくか、トップページへお戻りください。</p>
                     <a href="?p=md/index.md" class="error-button">← Go home</a>
                 </div>
