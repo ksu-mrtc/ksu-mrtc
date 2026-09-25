@@ -56,6 +56,11 @@ hr { border: none; border-top: 1px solid var(--hair); margin: 2em 0; }
 
 a { color: inherit; text-decoration: underline; }
 
+/* 操作画面の図。紙の幅に収め、途中で改ページしない */
+img { display: block; max-width: 100%; height: auto; margin: 1em auto .3em;
+      border: 1px solid var(--rule); break-inside: avoid; page-break-inside: avoid; }
+p:has(> img) + p > em { display: block; font-size: .9em; color: var(--sub); text-align: center; }
+
 .print-note { font-family:"Hiragino Sans",sans-serif; font-size:9pt; color:var(--sub);
               border:1px dashed var(--rule); border-radius:4px; padding:.7em 1em; margin: 0 0 2em; }
 @media print { .print-note { display: none; } }
@@ -71,7 +76,7 @@ a { color: inherit; text-decoration: underline; }
 <p>伝統みらい研究センター Webサイト（サーバーレス・アーカイブシステム）</p>
 <ul>
 <li>版：第1.1版　作成日：2026年8月　<strong>改訂日：2026年9月</strong></li>
-<li>画面の説明は 2026年8月時点の GitHub の画面に基づきます。ボタンの位置や英語表記は今後変わる可能性がありますが、「ファイルを開く → 編集する → Commit で保存する」という流れ自体は変わりません。</li>
+<li>画面の説明は 2026年8月時点、画面の図は 2026年9月時点の GitHub の画面に基づきます。ボタンの位置や英語表記は今後変わる可能性がありますが、「ファイルを開く → 編集する → Commit で保存する」という流れ自体は変わりません。</li>
 </ul>
 <h2>目次</h2>
 <ul>
@@ -481,6 +486,8 @@ a { color: inherit; text-decoration: underline; }
 </tr>
 </tbody>
 </table>
+<p><img src="assets/manual/01-top.jpg" alt="リポジトリのトップ。md フォルダ、Add file ボタン、Actions タブの位置"></p>
+<p><em>図1　リポジトリのトップ（2.3節でブックマークした画面）</em></p>
 <h4>いま自分がどこにいるか</h4>
 <p>画面の上のほうに、いまいる場所が左から順に並んでいます。</p>
 <pre><code>ksu-mrtc / md / news / 2026-07-15.md
@@ -490,6 +497,8 @@ a { color: inherit; text-decoration: underline; }
 <li><strong>名前をクリックすると、その場所まで戻れます。</strong> <code>md</code> をクリックすれば <code>md</code> フォルダの一覧に戻ります。</li>
 <li><strong>一番左（<code>ksu-mrtc</code>）をクリックすると、リポジトリのトップに戻ります。</strong> 2.3節でブックマークした画面と同じ場所です。</li>
 </ul>
+<p><img src="assets/manual/02-file.jpg" alt="記事ファイルを開いた画面。上部のいまいる場所の表示、History、鉛筆アイコンの位置"></p>
+<p><em>図2　記事ファイルを開いた画面（<code>md</code> → <code>news</code> → <code>2026-02-18.md</code>）</em></p>
 <blockquote>
 <p><strong>どこにいるか分からなくなったら</strong>、一番左を押してトップに戻り、<code>md</code> フォルダから入り直してください。これが一番確実です（ファイルの探し方 → 3.1節）。</p>
 </blockquote>
@@ -498,11 +507,17 @@ a { color: inherit; text-decoration: underline; }
 <h3>まず1回、やってみる（所要 5分ほど）</h3>
 <p>いきなり新しい記事を書く必要はありません。<strong>すでにある記事の文字を1つ直して公開する</strong>のが、いちばん短い一巡です。ここを一度通せば、あとの作業はその繰り返しになります。</p>
 <ol>
-<li>リポジトリのトップから <code>md</code> → <code>news</code> と開き、記事ファイルを1つクリックする（→ 3.1節）</li>
+<li>リポジトリのトップから <code>md</code> → <code>news</code> と開き、記事ファイルを1つクリックする（→ 3.1節。画面は 2.4節の図1・図2）</li>
 <li>右上の <strong>✏️</strong> を押して、本文の文字をどこか1つ直す（→ 3.2節）</li>
 <li><strong>Commit changes...</strong> を押して保存する（→ 3.6節）</li>
 <li>1〜2分待って、お知らせの一覧を開いて直っているか見る（→ 3.7節）</li>
 </ol>
+<p><img src="assets/manual/03-edit-before.jpg" alt="編集画面。何も変えていないうちは Commit changes... が薄く、押せない"></p>
+<p><em>図3　✏️ を押した直後の編集画面。何も変えていないうちは、右上の <strong>Commit changes...</strong> は薄い色で押せません</em></p>
+<p><img src="assets/manual/03-edit-after.jpg" alt="編集画面。本文を書き換えると Commit changes... が緑になる"></p>
+<p><em>図4　本文を1文字でも書き換えると、<strong>Commit changes...</strong> が緑になり、押せるようになります</em></p>
+<p><img src="assets/manual/04-commit.jpg" alt="Commit changes の小窓。メッセージ欄、Commit directly to the main branch、緑の Commit changes ボタン"></p>
+<p><em>図5　<strong>Commit changes...</strong> を押すと開く小窓。一言メモを書き、緑の <strong>Commit changes</strong> を押すと保存・公開されます</em></p>
 <p>うまくいかなくても、書き換える前の状態にいつでも戻せます（→ 4.3節）。</p>
 <blockquote>
 <p>実際の運用でも、<strong>新しい記事を書くより、すでにある記事を直す作業のほうが多くなります。</strong> まずこの一巡に慣れてください。</p>

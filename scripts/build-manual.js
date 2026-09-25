@@ -73,6 +73,11 @@ hr { border: none; border-top: 1px solid var(--hair); margin: 2em 0; }
 
 a { color: inherit; text-decoration: underline; }
 
+/* 操作画面の図。紙の幅に収め、途中で改ページしない */
+img { display: block; max-width: 100%; height: auto; margin: 1em auto .3em;
+      border: 1px solid var(--rule); break-inside: avoid; page-break-inside: avoid; }
+p:has(> img) + p > em { display: block; font-size: .9em; color: var(--sub); text-align: center; }
+
 .print-note { font-family:"Hiragino Sans",sans-serif; font-size:9pt; color:var(--sub);
               border:1px dashed var(--rule); border-radius:4px; padding:.7em 1em; margin: 0 0 2em; }
 @media print { .print-note { display: none; } }
