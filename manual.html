@@ -75,7 +75,7 @@ p:has(> img) + p > em { display: block; font-size: .9em; color: var(--sub); text
 <h1>ウェブサイト更新 操作マニュアル</h1>
 <p>伝統みらい研究センター Webサイト（サーバーレス・アーカイブシステム）</p>
 <ul>
-<li>版：第1.1版　作成日：2026年8月　<strong>改訂日：2026年9月</strong></li>
+<li>版：第1.2版　作成日：2026年8月　<strong>改訂日：2026年9月</strong></li>
 <li>画面の説明は 2026年8月時点、画面の図は 2026年9月時点の GitHub の画面に基づきます。ボタンの位置や英語表記は今後変わる可能性がありますが、「ファイルを開く → 編集する → Commit で保存する」という流れ自体は変わりません。</li>
 </ul>
 <h2>目次</h2>
@@ -132,6 +132,8 @@ p:has(> img) + p > em { display: block; font-size: .9em; color: var(--sub); text
 <blockquote>
 <p>GitHub の画面の中で <code>manual.html</code> を開くと、ページではなく中身の文字（HTML）が表示されます。印刷には使えないので、上のアドレスから開いてください。</p>
 </blockquote>
+<h3>困ったときの相談先</h3>
+<p>このマニュアルで「<strong>構築担当</strong>」と書いているのは、このサイトの仕組みを作った担当（九州産業大学大学院 芸術研究科）です。分からないことや、自分では直せないことがあったときの相談先です。連絡のしかたは、別にお伝えしています。</p>
 <h3>編集してはいけない場所</h3>
 <p>次の3つだけは触らないでください。<strong>これ以外は、間違えても元に戻せます</strong>（→ 4.3節）。</p>
 <ul>
@@ -221,7 +223,7 @@ p:has(> img) + p > em { display: block; font-size: .9em; color: var(--sub); text
 <td><strong>5.2節</strong></td>
 </tr>
 <tr>
-<td>メニューからページごと外したい ※管理者向け</td>
+<td>メニューからページごと外したい ※構築担当向け</td>
 <td><strong>5.3節</strong></td>
 </tr>
 <tr>
@@ -229,7 +231,7 @@ p:has(> img) + p > em { display: block; font-size: .9em; color: var(--sub); text
 <td><strong>5.1節</strong></td>
 </tr>
 <tr>
-<td>全データを手元に保管したい・サイトを復元したい ※管理者向け</td>
+<td>全データを手元に保管したい・サイトを復元したい ※構築担当向け</td>
 <td><strong>5.4節</strong></td>
 </tr>
 <tr>
@@ -284,6 +286,30 @@ p:has(> img) + p > em { display: block; font-size: .9em; color: var(--sub); text
 <tr>
 <td>Frontmatter（フロントマター）</td>
 <td>記事ファイルの先頭に書く「記事の情報カード」。タイトルや日付を書きます</td>
+</tr>
+<tr>
+<td>main branch（メイン ブランチ）</td>
+<td>保管庫の「本線」。ここに保存したものがサイトに公開されます。保存のときは、いつもこれを選びます</td>
+</tr>
+<tr>
+<td>Actions（アクションズ）</td>
+<td>保存のあとに自動で動く公開の処理と、その実行状況を見る画面</td>
+</tr>
+<tr>
+<td>Re-run jobs（リラン ジョブズ）</td>
+<td>失敗した自動の処理を、もう一度やり直すボタン</td>
+</tr>
+<tr>
+<td>ファイルの場所（パス）</td>
+<td><code>md/news/2026-07-15.md</code> のように、フォルダ名とファイル名を <code>/</code> でつないだ書き方</td>
+</tr>
+<tr>
+<td>alt（オルト）／src（ソース）</td>
+<td>alt は写真の説明文、src は写真の置き場所。5.2節で使います</td>
+</tr>
+<tr>
+<td>ファビコン</td>
+<td>ブラウザのタブに出る小さなマーク</td>
 </tr>
 </tbody>
 </table>
@@ -434,7 +460,7 @@ p:has(> img) + p > em { display: block; font-size: .9em; color: var(--sub); text
 <li>「本人確認コード」の入力を求められた場合は、登録メールアドレスに届いた数桁のコードを入力してください。</li>
 </ol>
 <blockquote>
-<p><strong>登録メールアドレス</strong>は、このサイトのために用意した Gmail のアドレスです（GitHub へのログインにも使うもの）。案内やコードはそこに届くので、その Gmail を開ける人に確認してください。</p>
+<p><strong>登録メールアドレス</strong>は、このサイトのために用意した Gmail のアドレスです（GitHub へのログインにも使うもの）。案内やコードはそこに届きます。その Gmail を開けないときは、構築担当に相談してください。</p>
 </blockquote>
 <h3>2.3 サイトの保管庫（リポジトリ）を開く</h3>
 <ol>
@@ -457,7 +483,7 @@ p:has(> img) + p > em { display: block; font-size: .9em; color: var(--sub); text
 <td>フォルダ。クリックで中に入れます</td>
 </tr>
 <tr>
-<td>画面上部のパス表示（例 <code>md / news</code>）</td>
+<td>画面上部の場所の表示（例 <code>md / news</code>）</td>
 <td>いまいる場所（→ 下の「いま自分がどこにいるか」）</td>
 </tr>
 <tr>
@@ -511,6 +537,7 @@ p:has(> img) + p > em { display: block; font-size: .9em; color: var(--sub); text
 <li>右上の <strong>✏️</strong> を押して、本文の文字をどこか1つ直す（→ 3.2節）</li>
 <li><strong>Commit changes...</strong> を押して保存する（→ 3.6節）</li>
 <li>1〜2分待って、お知らせの一覧を開いて直っているか見る（→ 3.7節）</li>
+<li><strong>直した文字を元に戻して、もう一度保存する</strong>（2〜3の繰り返し）。練習で変えた文字が、そのまま公開に残らないようにするためです</li>
 </ol>
 <p><img src="assets/manual/03-edit-before.jpg" alt="編集画面。何も変えていないうちは Commit changes... が薄く、押せない"></p>
 <p><em>図3　✏️ を押した直後の編集画面。何も変えていないうちは、右上の <strong>Commit changes...</strong> は薄い色で押せません</em></p>
@@ -633,13 +660,16 @@ p:has(> img) + p > em { display: block; font-size: .9em; color: var(--sub); text
 </tbody>
 </table>
 <blockquote>
-<p>研究成果・製作メンバーの記事に写真を載せたいときは、管理者に相談してください。写真を置くフォルダ（<code>images/research/</code> など）がまだないためです。</p>
+<p>研究成果・製作メンバーの記事に写真を載せたいときは、構築担当に相談してください。写真を置くフォルダ（<code>images/research/</code> など）がまだないためです。</p>
 </blockquote>
 <blockquote>
 <p><code>kakiemon</code>・<code>local-industry</code> と、<code>center</code> の直下は、記事を並べる一覧を持たない<strong>1枚もののページ</strong>です。ここを直すときは新しく記事を作らず、3.2節の手順でそのフォルダの <code>index.md</code> を編集します。</p>
 </blockquote>
 <blockquote>
 <p><strong><code>index.md</code> の情報カードにある <code>navTitle:</code>・<code>navOrder:</code>・<code>collection:</code> の行は変えないでください。</strong> サイト上部のメニューの名前と並び順、記事の一覧がこの行で決まっています（→ 5.3節）。直してよいのは <code>title:</code> と、<code>---</code> より下の本文です。</p>
+</blockquote>
+<blockquote>
+<p>作品ごとのページなど、いまの一覧にない種類のページを足したいときは、自分でフォルダを作らず、構築担当に相談してください。</p>
 </blockquote>
 <h4>手順</h4>
 <ol>
@@ -669,7 +699,7 @@ image: &quot;images/news/（画像ファイル名）&quot;
 </code></pre>
 <p><strong><code>（　）</code> が入っている行は、かっこごと消して書き換えてください。</strong> 画像を使わない記事では <code>image:</code> の行ごと削除します。</p>
 <blockquote>
-<p><strong>本文の最初の <code># </code> の行が、記事ページの一番上に出る題名になります。</strong> 情報カードの <code>title</code> は一覧に出る名前で、記事ページには表示されません。<code># </code> の行を消すと、題名のないページになります。</p>
+<p><strong>本文の最初の <code># </code> の行が、記事ページの一番上に出る題名になります。</strong> 情報カードの <code>title</code> は一覧に出る名前で、ブラウザのタブにも表示されますが、記事ページの中には表示されません。<code># </code> の行を消すと、題名のないページになります。</p>
 </blockquote>
 <blockquote>
 <p>ここに載せたものと同じテンプレートが <strong>付録A</strong> にもあります。印刷して使うときは、そちらを切り離して手元に置くと、行き来せずに済みます。</p>
@@ -683,7 +713,7 @@ image: &quot;images/news/（画像ファイル名）&quot;
 <li><code>index.md</code> という名前は一覧ページ専用なので、<strong>記事には使わない</strong></li>
 </ul>
 <blockquote>
-<p>記事の並び順は情報カードの <code>date</code> で決まるため、ファイル名そのものは表示に影響しません。それでも<strong>日付から始めてください。</strong> あとからファイルを探すとき、名前だけで見分けられるようにするためです。</p>
+<p>記事の並び順は情報カードの <code>date</code> で決まるため、ファイル名そのものは表示に影響しません。それでもお知らせと研究成果は<strong>日付から始めてください。</strong> あとからファイルを探すとき、名前だけで見分けられるようにするためです。</p>
 </blockquote>
 <blockquote>
 <p><strong>すでにあるファイルには、このルールより前に作られたもの</strong>（<code>2026-02-18.md</code> のような日付だけの名前、<code>佐藤蒼.md</code> のような日本語の名前、<code>2025.7.28_1.jpg</code> のような画像名）があります。<strong>これらの名前は変えないでください。</strong> ファイル名はそのままページの住所（URL）になっているため、変えるとそのページへのリンクが切れます。ルールは、これから新しく作るファイルにだけ当てはめます。</p>
@@ -747,7 +777,7 @@ image: &quot;images/news/2026-07-15-summer.jpg&quot;
 <li>各項目は<strong>1行におさめる</strong>（途中で改行しない）</li>
 </ul>
 <h3>3.4 Markdown記法の早見表（本文の書き方）</h3>
-<p><code>---</code> の下は、ふつうの文章として本文を書きます。よく使う記号は次の5つだけ覚えれば十分です。</p>
+<p><code>---</code> の下は、ふつうの文章として本文を書きます。よく使う記号は次の6つだけ覚えれば十分です。</p>
 <table>
 <thead>
 <tr>
@@ -828,8 +858,8 @@ image: &quot;images/news/2026-07-15-summer.jpg&quot;
 <li>
 <p>リポジトリのトップから <code>images</code> フォルダを開き、<strong>入れたいフォルダまで進みます</strong>（お知らせの写真なら <code>images</code> → <code>news</code>）。</p>
 <blockquote>
-<p><strong>ここが一番間違えやすいところです。</strong> <strong>Upload files</strong> は「<strong>いま開いているフォルダ</strong>」に画像を置きます。リポジトリのトップで押すとトップに置かれてしまい、記事から呼び出せません。いまどこにいるかは画面上部のパス表示で確かめられます（→ 2.4節）。</p>
-<p>入れたいフォルダが無いときは、担当者に相談してください（現在あるのは <code>news</code>・<code>kakiemon</code>・<code>slideshow</code> などです）。</p>
+<p><strong>ここが一番間違えやすいところです。</strong> <strong>Upload files</strong> は「<strong>いま開いているフォルダ</strong>」に画像を置きます。リポジトリのトップで押すとトップに置かれてしまい、記事から呼び出せません。いまどこにいるかは画面上部の場所の表示で確かめられます（→ 2.4節）。</p>
+<p>入れたいフォルダが無いときは、構築担当に相談してください（現在あるのは <code>news</code>・<code>kakiemon</code>・<code>slideshow</code> などです）。</p>
 </blockquote>
 </li>
 <li>
@@ -971,18 +1001,18 @@ image: &quot;images/news/2026-07-15-summer.jpg&quot;
 </tbody>
 </table>
 <blockquote>
-<p><strong>①と②は「一覧に出さない」であって、「公開を取り消す」ではありません。</strong> ①は、記事のURLを知っている人がそのページを開けば読めます。②で伏せた文章も、記事のファイルそのものを開けば読めます。</p>
+<p><strong>①と②は「一覧に出さない」であって、「公開を取り消す」ではありません。</strong> ①は、記事のURLを知っている人がそのページを開けば読めます。②で伏せた文章も、このサイトの保管庫は誰でも見られるため、そこから読めます。</p>
 </blockquote>
 <blockquote>
-<p><strong>③で削除しても、記録からは消えません。</strong> このサイトの保管庫は公開されているため、削除する前の内容は、変更の記録（History）から誰でも読めます。個人情報など、公開してはいけないものを保存してしまったときは、①〜③のどれでも足りません。<strong>すぐに管理者に相談してください。</strong></p>
+<p><strong>③で削除しても、記録からは消えません。</strong> このサイトの保管庫は公開されているため、削除する前の内容は、変更の記録（History）から誰でも読めます。個人情報など、公開してはいけないものを保存してしまったときは、①〜③では消せません。<strong>すぐに構築担当に相談してください。</strong></p>
 </blockquote>
 <h4>① 一覧から外す（ファイルは残す）</h4>
 <ol>
 <li>3.2節の手順で記事ファイルを開き、編集画面（鉛筆アイコン）にします。</li>
-<li>情報カードの中の <code>category: &quot;news&quot;</code> の行を、<strong>行ごと</strong>消します。</li>
+<li>情報カードの中の <code>category:</code> の行（お知らせなら <code>category: &quot;news&quot;</code>）を、<strong>行ごと</strong>消します。</li>
 <li><strong>Commit changes</strong> で保存します（→ 3.6節）。</li>
 </ol>
-<p>1〜2分でお知らせ一覧とトップページの「最新ニュース」から消えます。戻したくなったら、同じ場所に <code>category: &quot;news&quot;</code> の行を書き戻してコミットすれば、また一覧に出ます。</p>
+<p>1〜2分で、その記事が並んでいた一覧から消えます（お知らせなら、トップページの「最新ニュース」からも消えます）。戻したくなったら、消した <code>category:</code> の行を同じ場所に書き戻してコミットすれば、また一覧に出ます。</p>
 <blockquote>
 <p>消すのは <code>category:</code> の<strong>1行だけ</strong>です。<code>---</code> の行や <code>title:</code> を消すと、ページの表示が崩れます（→ 4.2節）。</p>
 </blockquote>
@@ -1001,7 +1031,7 @@ image: &quot;images/news/2026-07-15-summer.jpg&quot;
 <li><strong>Commit changes</strong> で確定します。一覧からも自動で消えます。</li>
 </ol>
 <blockquote>
-<p><strong>消しても記録は残るので、あとから元に戻せます。</strong> 手順は 4.3節にあります。「消したら二度と戻らない」ということはありません。</p>
+<p><strong>削除した記事は、あとから元に戻せます</strong>（→ 4.3節）。記録が残っているためです。同じ理由で、削除しても公開したことをなかったことにはできません（→ この節の冒頭の注意）。</p>
 </blockquote>
 <blockquote>
 <p><strong>ページごと（コーナーごと）メニューから外したいとき</strong>は、記事ではなくサイトの構成を変える操作になります。5.3節を見てください。</p>
@@ -1021,8 +1051,8 @@ image: &quot;images/news/2026-07-15-summer.jpg&quot;
 <li>[ ] 1行目が <code>---</code>（半角ハイフン3つ）で始まっているか。情報カードの終わりにも <code>---</code> があるか</li>
 <li>[ ] コロンは<strong>半角の <code>:</code></strong> か。コロンの後に<strong>半角スペース</strong>があるか</li>
 <li>[ ] 値は半角の <code>&quot;</code> で囲まれ、閉じ忘れがないか</li>
-<li>[ ] <code>date</code> は <code>2026-07-15</code> の形式か</li>
-<li>[ ] お知らせ記事なら <code>category: &quot;news&quot;</code> と書いてあるか（<code>News</code> や <code>ニュース</code> は×）</li>
+<li>[ ] （お知らせ・研究成果）<code>date</code> は <code>2026-07-15</code> の形式か</li>
+<li>[ ] <code>category</code> が記事の種類に合っているか（お知らせは <code>news</code>、研究成果は <code>research</code>、製作メンバーは <code>member</code>。<code>News</code> や <code>ニュース</code> は×）</li>
 <li>[ ] <code>image</code> に書いた場所と、実際に画像を置いた場所が一致しているか（画像なしなら <code>image</code> の行ごと削除したか）</li>
 <li>[ ] ファイル名が半角英数字で、<code>.md</code> で終わっているか</li>
 </ul>
@@ -1039,7 +1069,7 @@ image: &quot;images/news/2026-07-15-summer.jpg&quot;
 <p>うまくいかないとき・ファイルを丸ごと消してしまったときは、無理をせず相談してください（→ 4.4節）。記録が残っているので、必ず復元できます。</p>
 </blockquote>
 <h3>4.4 どうしても解決しないとき（何を伝えればよいか）</h3>
-<p>自分だけで解決しようとせず、サイトの管理担当者に相談してください。そのとき、次の3つを伝えると原因をたどりやすくなります。</p>
+<p>自分だけで解決しようとせず、構築担当に相談してください。そのとき、次の3つを伝えると原因をたどりやすくなります。</p>
 <ul>
 <li><strong>どのファイルを</strong>（例：<code>md/news/2026-07-15-summer.md</code>）</li>
 <li><strong>何をしようとして</strong>（例：新しいお知らせを追加しようとした）</li>
@@ -1096,9 +1126,9 @@ image: &quot;images/news/2026-07-15-summer.jpg&quot;
 <li>カンマや <code>&quot;</code> の書き間違いでファイルが読めない形になっても、写真の表示は壊れません。ただし、<strong>すべての写真の説明がファイル名に戻ります。</strong> 保存後にトップページの写真が出ているか、説明が残っているかを確かめてください。</li>
 <li>画像を消したときは、その組も消しておくと分かりやすくなります（残っていても表示は壊れません）。</li>
 </ul>
-<h3>5.3 新しいコーナー（メニュー項目）を増やしたいとき ※管理者向け</h3>
-<p><code>md/</code> の直下に新しいフォルダを作り、その中に <code>index.md</code> を置いて、情報カードに <code>navTitle:</code>（メニューに表示する名前）と <code>navOrder:</code>（並び順の数字）を書くと、サイト上部のメニューに自動で追加されます。記事一覧を自動表示させたい場合は <code>collection:</code> に記事の <code>category</code> と同じ言葉を書きます。通常の記事更新では使わないため、詳細は管理者にご相談ください。</p>
-<h3>5.4 バックアップ（クローン）と復元 ※管理者向け</h3>
+<h3>5.3 新しいコーナー（メニュー項目）を増やしたいとき ※構築担当向け</h3>
+<p><code>md/</code> の直下に新しいフォルダを作り、その中に <code>index.md</code> を置いて、情報カードに <code>navTitle:</code>（メニューに表示する名前）と <code>navOrder:</code>（並び順の数字）を書くと、サイト上部のメニューに自動で追加されます。記事一覧を自動表示させたい場合は <code>collection:</code> に記事の <code>category</code> と同じ言葉を書きます。通常の記事更新では使わないため、詳細は構築担当にご相談ください。</p>
+<h3>5.4 バックアップ（クローン）と復元 ※構築担当向け</h3>
 <p>このサイトの全データ（記事・画像・仕組みのすべて）は、リポジトリを「クローン（複製）」することで、<strong>変更の記録ごと</strong>手元のパソコンに丸ごとコピーできます。定期的（例：月1回）に取得して保管しておくと、万一サービスに障害があってもサイト全体を復元できます。</p>
 <h4>クローンする</h4>
 <p><strong>方法A：GitHub Desktop（無料のアプリ）を使う</strong></p>
@@ -1164,10 +1194,10 @@ image: &quot;images/news/（画像ファイル名）&quot;
 <ul>
 <li>[ ] ファイル名は半角英数字＋ハイフンで、<code>.md</code> で終わっている</li>
 <li>[ ] 情報カードは <code>---</code> で始まり <code>---</code> で閉じている</li>
-<li>[ ] <code>date</code> は <code>YYYY-MM-DD</code> 形式で書いた</li>
+<li>[ ] お知らせ・研究成果では、<code>date</code> を <code>2026-07-15</code> の形で書いた</li>
 <li>[ ] <code>date</code> に<strong>全角の数字</strong>（<code>２０２６</code>）が混じっていない</li>
 <li>[ ] 値は半角の <code>&quot;</code> で囲んだ</li>
-<li>[ ] お知らせ記事に <code>category: &quot;news&quot;</code> を書いた</li>
+<li>[ ] <code>category</code> に記事の種類を書いた（お知らせは <code>news</code>、研究成果は <code>research</code>、製作メンバーは <code>member</code>）</li>
 <li>[ ] テンプレートの <strong><code>（　）</code> が残っていない</strong></li>
 <li>[ ] <strong>本文を書いた</strong>（情報カードだけで終わっていない）。本文の最初に <code># 題名</code> の行がある</li>
 <li>[ ] 画像を使う場合、<code>images/</code> にアップロードし、場所の書き間違いがない</li>
