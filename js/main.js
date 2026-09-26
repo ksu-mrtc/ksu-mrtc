@@ -14,25 +14,31 @@ document.addEventListener('DOMContentLoaded', async () => {
     let slideshowData = [];
 
     // Load static parts
-    try {
-        const [headerRes, footerRes, contentRes, slideshowRes] = await Promise.all([
-            fetch('md/parts/header.md'),
-            fetch('md/parts/footer.md'),
-            fetch('content.json'),
-            fetch('slideshow.json')
-        ]);
-        
-        headerMd = await headerRes.text();
-        footerMd = await footerRes.text();
-        contentIndex = await contentRes.json();
-        slideshowData = await slideshowRes.json();
-
-
-    } catch (error) {
-        console.error('Error loading resources:', error);
-        document.body.innerHTML = 'Error loading site.';
-        return;
+    // いずれかが取得できない・読めない場合も、サイト全体は止めずに、その部品だけを欠いて表示を続ける（段階的縮退）。
+    //   content.json を手で書き換えて書式を誤った場合 → 一覧と最新ニュースが空になるだけで、各ページは表示される
+    function parseJsonArray(text) {
+        const value = JSON.parse(text);
+        if (!Array.isArray(value)) throw new Error('not an array');
+        return value;
     }
+
+    async function loadResource(url, parse, fallback) {
+        try {
+            const res = await fetch(url);
+            if (!res.ok) throw new Error(`${res.status} ${url}`);
+            return parse(await res.text());
+        } catch (error) {
+            console.error(`Error loading ${url}:`, error);
+            return fallback;
+        }
+    }
+
+    [headerMd, footerMd, contentIndex, slideshowData] = await Promise.all([
+        loadResource('md/parts/header.md', text => text, ''),
+        loadResource('md/parts/footer.md', text => text, ''),
+        loadResource('content.json', parseJsonArray, []),
+        loadResource('slideshow.json', parseJsonArray, [])
+    ]);
 
 
 
