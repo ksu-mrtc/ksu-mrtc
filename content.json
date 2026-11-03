@@ -113,14 +113,6 @@
     "description": "本学柿右衛門様式窯で71回目の窯開きが行われ、制作した約500点の作品が窯出しされました。"
   },
   {
-    "url": "/research/kakiemon-red",
-    "path": "md/research/kakiemon-red.md",
-    "title": "研究成果（準備中）",
-    "date": "2024-12-15",
-    "category": "research",
-    "description": "研究成果は現在準備中です。公開までしばらくお待ちください。"
-  },
-  {
     "url": "/news/2025-07-28",
     "path": "md/news/2025-07-28.md",
     "title": "「柿右衛門様式窯」で72回目の窯開き",
@@ -153,5 +145,13 @@
     "category": "news",
     "description": "大学院生11名が十五代酒井田柿右衛門客員教授から有田焼の歴史・制作背景について学びました。",
     "image": "images/news/2026.2.18_1.jpg"
+  },
+  {
+    "url": "/research/kakiemon-red",
+    "path": "md/research/kakiemon-red.md",
+    "title": "研究成果（準備中）",
+    "date": "2026-11-03",
+    "category": "research",
+    "description": "研究成果は現在準備中です。公開までしばらくお待ちください。"
   }
 ]
